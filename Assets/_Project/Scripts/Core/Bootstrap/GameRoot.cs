@@ -19,7 +19,14 @@ namespace Core.Bootstrap
     /// </summary>
     public sealed class GameRoot : MonoBehaviour
     {
+        private const int SfxPoolSize = 6;
+
         [SerializeField] private string _firstSceneName = "MainMenu";
+
+        [Header("Scene-authored refs (preferred) — leave empty to fall back to runtime construction")]
+        [SerializeField] private AudioListener _audioListener;
+        [SerializeField] private AudioSource _musicSource;
+        [SerializeField] private AudioSource[] _sfxSources;
 
         private static GameRoot _instance;
 
@@ -36,6 +43,19 @@ namespace Core.Bootstrap
             _instance = this;
             DontDestroyOnLoad(gameObject);
 
+            // Without an AudioListener SOMEWHERE in the scene, every AudioSource still
+            // reports isPlaying = true and its clip still advances — Unity just never
+            // actually outputs any sound, silently. None of the gameplay scenes create
+            // one (Canvas-only UI scenes don't need a camera at all, and Gameplay's own
+            // fallback camera never added one either), so without this the whole game
+            // would be permanently, invisibly muted. Putting it on GameRoot (persistent,
+            // exactly one instance for the app's lifetime) guarantees it exists
+            // regardless of which scene is active.
+            if (_audioListener == null || _musicSource == null || _sfxSources == null || _sfxSources.Length == 0)
+            {
+                BuildAudioFallback();
+            }
+
             await InitializeServicesAsync();
 
             SceneManager.LoadScene(_firstSceneName);
@@ -47,6 +67,24 @@ namespace Core.Bootstrap
             // hypothetical. LoadScene is synchronous, so by the time it returns here the
             // new scene is already active and it's safe to start the music.
             GameServices.Audio.PlayMusic("BackgroundBGM");
+        }
+
+        /// <summary>Original runtime-construction path, used only when scene-authored audio refs are missing.</summary>
+        private void BuildAudioFallback()
+        {
+            _audioListener = gameObject.AddComponent<AudioListener>();
+
+            var musicGO = new GameObject("Music");
+            musicGO.transform.SetParent(transform, false);
+            _musicSource = musicGO.AddComponent<AudioSource>();
+
+            _sfxSources = new AudioSource[SfxPoolSize];
+            for (var i = 0; i < SfxPoolSize; i++)
+            {
+                var go = new GameObject("Sfx_" + i);
+                go.transform.SetParent(transform, false);
+                _sfxSources[i] = go.AddComponent<AudioSource>();
+            }
         }
 
         /// <summary>
@@ -70,7 +108,7 @@ namespace Core.Bootstrap
             var addressablesService = new AddressablesService();
             await addressablesService.InitializeAsync();
 
-            var audioService = new AudioService();
+            var audioService = new AudioService(_musicSource, _sfxSources);
             var analyticsService = new NoOpAnalyticsService();
             var hapticsService = new HapticsService();
             var eventBus = new EventBusImpl();

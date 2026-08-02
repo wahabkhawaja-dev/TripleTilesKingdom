@@ -149,12 +149,22 @@ namespace Presentation
         /// rendering peek-through effect (doesn't shift X, so it can't affect which
         /// tiles visually nest over which) — higher layers rise toward a peak while the
         /// base they're centered on stays put underneath.
+        ///
+        /// LevelGenerator's minX/minY = layer/2 (integer division) truncates the .5
+        /// remainder for odd layer numbers, under-insetting each such layer's left and
+        /// top edges by half a cell relative to true center. On Y that reads as the
+        /// intended "peeking from below" look (more base exposed at the bottom, not the
+        /// top — the desired -Y view). On X it reads as a spurious sideways lean (more
+        /// base exposed on the right, as if viewed from that side) — xCorrection cancels
+        /// exactly that half-cell, and only that, re-centering X without touching Y or
+        /// the underlying domain coordinates StackingResolver depends on.
         /// </summary>
         private Vector2 GetAnchoredPositionForTile(BoardCoordinate coord)
         {
             var lift = coord.Layer * _layerStackOffset;
+            var xCorrection = (coord.Layer / 2f - coord.Layer / 2) * _tileSpacing;
             return new Vector2(
-                coord.X * _tileSpacing + _centerOffset.x,
+                coord.X * _tileSpacing + _centerOffset.x + xCorrection,
                 -coord.Y * _tileSpacing + _centerOffset.y + lift);
         }
 

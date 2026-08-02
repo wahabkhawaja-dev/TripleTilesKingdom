@@ -3,18 +3,19 @@ using UnityEngine;
 namespace Core.Services
 {
     /// <summary>
-    /// Pooled-AudioSource playback. Owns a single looping music source plus a small
+    /// Pooled-AudioSource playback. Uses a single looping music source plus a small
     /// round-robin pool of one-shot sfx sources (so overlapping sounds — e.g. a
     /// staggered multi-tile pop — each get their own AudioSource and don't have their
-    /// pitch/volume stomped on by whichever sfx fires next) — creates a persistent
-    /// hidden GameObject so playback survives scene loads exactly like GameRoot itself.
+    /// pitch/volume stomped on by whichever sfx fires next). Takes those AudioSources
+    /// in rather than creating its own hidden GameObjects — GameRoot owns them as real,
+    /// scene-authored objects (visible and editable in Bootstrap.unity, same as every
+    /// other piece of UI in this project), not something conjured invisibly at runtime.
     /// Clip keys resolve against a single Resources-loaded AudioThemeSO; unknown keys or
     /// a missing theme silently no-op rather than throw, since a missing sound should
     /// never be able to break gameplay.
     /// </summary>
     public sealed class AudioService : IAudioService
     {
-        private const int SfxPoolSize = 6;
         private const float MusicVolume = 0.55f;
         private const float SfxVolume = 0.9f;
 
@@ -27,29 +28,20 @@ namespace Core.Services
         private bool _musicMuted;
         private bool _sfxMuted;
 
-        public AudioService()
+        public AudioService(AudioSource musicSource, AudioSource[] sfxSources)
         {
             _theme = Resources.Load<AudioThemeSO>("AudioTheme_Default");
 
-            var root = new GameObject("AudioService");
-            Object.DontDestroyOnLoad(root);
-
-            var musicGO = new GameObject("Music");
-            musicGO.transform.SetParent(root.transform);
-            _musicSource = musicGO.AddComponent<AudioSource>();
+            _musicSource = musicSource;
             _musicSource.loop = true;
             _musicSource.playOnAwake = false;
             _musicSource.volume = MusicVolume;
 
-            _sfxSources = new AudioSource[SfxPoolSize];
-            for (var i = 0; i < SfxPoolSize; i++)
+            _sfxSources = sfxSources;
+            foreach (var source in _sfxSources)
             {
-                var go = new GameObject("Sfx_" + i);
-                go.transform.SetParent(root.transform);
-                var source = go.AddComponent<AudioSource>();
                 source.playOnAwake = false;
                 source.loop = false;
-                _sfxSources[i] = source;
             }
         }
 
