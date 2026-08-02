@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a89a780318771342a221496a0caab0f, type: 3}
+  m_Name: UITheme_Default
+  m_EditorClassIdentifier: Assembly-CSharp::Presentation.UI.UIThemeSO
+  ButtonGreen: {fileID: -391755768, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  ButtonOrange: {fileID: 727230657, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  StatusBar: {fileID: -380312944546700833, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  IconPlay: {fileID: -1568811163, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  IconPause: {fileID: -7787855751065782160, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  ArrowBack: {fileID: 2025104927, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  ArrowForward: {fileID: 834839064, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  IconSettings: {fileID: 4314564746273655664, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  IconShuffle: {fileID: 4278783874193816211, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  IconHint: {fileID: -6083513776872624320, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  IconUndo: {fileID: -8848970173540874021, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  Ribbon: {fileID: 3759556255623664804, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  Plaque: {fileID: 176677817911848833, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  NavHome: {fileID: -4558978850344690678, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  NavShop: {fileID: 3062129780902778864, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  NavPeople: {fileID: 7373774374483825414, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  NavSettings: {fileID: 8388266443068888325, guid: 4872ccb8a2cdc83429f46864b1e92775, type: 3}
+  PauseIcon2: {fileID: 2105815173, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  ResumeIcon2: {fileID: -3375672877020520582, guid: 21becaac69f24d94a95d740b74e1ebf5, type: 3}
+  ReplayIcon2: {fileID: 7468223088598575015, guid: 21becaac69f24d94a95d740b74e1ebf5, type: 3}
+  ShuffleIcon2: {fileID: -762979190, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  HintIcon2: {fileID: 296060760, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  HammerIcon2: {fileID: -1195101352, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  UndoIcon2: {fileID: 960785247, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  AddSlotIcon2: {fileID: 7999230655838423643, guid: 21becaac69f24d94a95d740b74e1ebf5, type: 3}
+  CancelIcon2: {fileID: -3704958198591242903, guid: 21becaac69f24d94a95d740b74e1ebf5, type: 3}
+  ConfirmIcon2: {fileID: 5225279934206443931, guid: 21becaac69f24d94a95d740b74e1ebf5, type: 3}
+  PanelCream: {fileID: -986594125, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  PanelPurple: {fileID: -1348544617, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  RibbonA: {fileID: 326411621, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  RibbonB: {fileID: 2104159236, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  BarHeart: {fileID: 326443889, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  BarStar: {fileID: -1250675887, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  ChestBronze: {fileID: 5525946063197666648, guid: 21becaac69f24d94a95d740b74e1ebf5, type: 3}
+  ChestSilver: {fileID: 3952042493827932791, guid: 21becaac69f24d94a95d740b74e1ebf5, type: 3}
+  ChestGold: {fileID: -1963553829, guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c, type: 3}
+  ChestPurple: {fileID: 1766480463374740564, guid: 21becaac69f24d94a95d740b74e1ebf5, type: 3}

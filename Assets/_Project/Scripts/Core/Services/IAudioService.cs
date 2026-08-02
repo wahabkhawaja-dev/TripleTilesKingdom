@@ -15,7 +15,12 @@ namespace Core.Services
     /// </summary>
     public interface IAudioService
     {
-        void PlaySfx(string clipKey, float volumeScale = 1f);
+        /// <summary>
+        /// <paramref name="pitch"/> lets call sites vary otherwise-identical repeated
+        /// sounds (e.g. a run of tile-pop sfx firing in quick succession) so they don't
+        /// sound like the exact same recording stamped out N times in a row.
+        /// </summary>
+        void PlaySfx(string clipKey, float volumeScale = 1f, float pitch = 1f);
         void PlayMusic(string trackKey, bool crossfade = true);
         void SetMuted(AudioCategory category, bool muted);
     }

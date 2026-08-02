@@ -1,0 +1,606 @@
+fileFormatVersion: 2
+guid: 3e1d57ad0a8a5d34b8167dbf4b25b77c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1216683467853762442
+    second: UI SpriteSheet 3_0
+  - first:
+      213: -5367111084508682648
+    second: UI SpriteSheet 3_1
+  - first:
+      213: -954848705323920735
+    second: UI SpriteSheet 3_2
+  - first:
+      213: 340047887503166584
+    second: UI SpriteSheet 3_3
+  - first:
+      213: -3977741681286820556
+    second: UI SpriteSheet 3_4
+  - first:
+      213: -9154761979395641065
+    second: UI SpriteSheet 3_5
+  - first:
+      213: 2354500848976644596
+    second: UI SpriteSheet 3_6
+  - first:
+      213: 4565255719576446537
+    second: UI SpriteSheet 3_7
+  - first:
+      213: 7524641044772177211
+    second: UI SpriteSheet 3_8
+  - first:
+      213: 328344635089929160
+    second: UI SpriteSheet 3_9
+  - first:
+      213: -7677089389499128927
+    second: UI SpriteSheet 3_10
+  - first:
+      213: -7724687719589772762
+    second: UI SpriteSheet 3_11
+  - first:
+      213: -3851388006198870815
+    second: UI SpriteSheet 3_12
+  - first:
+      213: -2355181971211652755
+    second: UI SpriteSheet 3_13
+  - first:
+      213: 8093810311385648527
+    second: UI SpriteSheet 3_14
+  - first:
+      213: 1396489929581258898
+    second: UI SpriteSheet 3_15
+  - first:
+      213: 4988546738872806474
+    second: UI SpriteSheet 3_16
+  - first:
+      213: 6270318083359957725
+    second: UI SpriteSheet 3_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ChestGold
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 176
+        width: 108
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02bbfa32a47ab824ba02cc2eee9a4d12
+      internalID: -1963553829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HintIcon2
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 184
+        width: 97
+        height: 97
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64bb539d856ab3043aac884b180286f3
+      internalID: 296060760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HammerIcon2
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 185
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a107b95e2643f5e45add76ef90a9f8f4
+      internalID: -1195101352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShuffleIcon2
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 185
+        width: 97
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1b358cf787d77842b6405478ce06f0f
+      internalID: -762979190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UndoIcon2
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 186
+        width: 93
+        height: 95
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a65ddba2163bba74f8cd8aea75f51c1f
+      internalID: 960785247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowBack
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 190
+        width: 90
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 858f03ac106f22943add908a15bdfd22
+      internalID: 2025104927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowForward
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 190
+        width: 90
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92c0041f7cfb24c4bbce23585c1780b6
+      internalID: 834839064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonGreen
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 192
+        width: 167
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5032bfff6bad67048aaa1776f4c92119
+      internalID: -391755768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonOrange
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 81
+        width: 161
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4de1722048d376e43a8cafc86c208670
+      internalID: 727230657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelCream
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 82
+        width: 210
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 30, y: 20, z: 30, w: 20}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94a29ff88260e194e9d9f50080b79229
+      internalID: -986594125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauseIcon2
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 85
+        width: 83
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16c1a83809b261d4fa99a475bf1010c2
+      internalID: 2105815173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconPlay
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 85
+        width: 84
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa13942eeb48bcc45aad457190867e16
+      internalID: -1568811163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PanelPurple
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 93
+        width: 210
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 30, y: 20, z: 30, w: 20}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac97f307794bd9a4b9accb925d0b8c02
+      internalID: -1348544617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarStar
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6
+        width: 175
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c4d51c2bbcd12342bc6c12f28ccec9a
+      internalID: -1250675887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BarHeart
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 9
+        width: 147
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a329956513f85bc43866f1b55eefb3c1
+      internalID: 326443889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RibbonA
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 16
+        width: 126
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 10, z: 24, w: 10}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dea4b4aa5a9d1814d90b396d8c025b12
+      internalID: 326411621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RibbonB
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 17
+        width: 124
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 24, y: 10, z: 24, w: 10}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19e14ff9f5283004f8ebcb9759bcc7af
+      internalID: 2104159236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2467e1b754e8a234f85f242c0dc81a2b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ArrowBack: 2025104927
+      ArrowForward: 834839064
+      BarHeart: 326443889
+      BarStar: -1250675887
+      ButtonGreen: -391755768
+      ButtonOrange: 727230657
+      ChestGold: -1963553829
+      HammerIcon2: -1195101352
+      HintIcon2: 296060760
+      IconPlay: -1568811163
+      PanelCream: -986594125
+      PanelPurple: -1348544617
+      PauseIcon2: 2105815173
+      RibbonA: 326411621
+      RibbonB: 2104159236
+      ShuffleIcon2: -762979190
+      UI SpriteSheet 3_0: -1216683467853762442
+      UI SpriteSheet 3_1: -5367111084508682648
+      UI SpriteSheet 3_10: -7677089389499128927
+      UI SpriteSheet 3_11: -7724687719589772762
+      UI SpriteSheet 3_12: -3851388006198870815
+      UI SpriteSheet 3_13: -2355181971211652755
+      UI SpriteSheet 3_14: 8093810311385648527
+      UI SpriteSheet 3_15: 1396489929581258898
+      UI SpriteSheet 3_16: 4988546738872806474
+      UI SpriteSheet 3_17: 6270318083359957725
+      UI SpriteSheet 3_2: -954848705323920735
+      UI SpriteSheet 3_3: 340047887503166584
+      UI SpriteSheet 3_4: -3977741681286820556
+      UI SpriteSheet 3_5: -9154761979395641065
+      UI SpriteSheet 3_6: 2354500848976644596
+      UI SpriteSheet 3_7: 4565255719576446537
+      UI SpriteSheet 3_8: 7524641044772177211
+      UI SpriteSheet 3_9: 328344635089929160
+      UndoIcon2: 960785247
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

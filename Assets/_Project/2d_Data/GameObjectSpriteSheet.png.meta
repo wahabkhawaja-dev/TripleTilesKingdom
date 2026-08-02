@@ -326,6 +326,18 @@ TextureImporter:
   - first:
       213: 2515943915195201518
     second: Fruit_Mushroom
+  - first:
+      213: 3268300186058770741
+    second: Particle_Sparkle1
+  - first:
+      213: 3525216015702114711
+    second: Particle_CoinBurst
+  - first:
+      213: 6285901611877691997
+    second: Particle_Sparkle2
+  - first:
+      213: 8128200723352168874
+    second: Particle_Sparkle3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -1811,7 +1823,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameObjectSpriteSheet_62
+      name: Particle_Sparkle1
       rect:
         serializedVersion: 2
         x: 328
@@ -1826,8 +1838,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 607822f9202ce4e10800000000000000
-      internalID: 2183896185836832518
+      spriteID: 5394069f3b55b5d20800000000000000
+      internalID: 3268300186058770741
       vertices: []
       indices: 
       edges: []
@@ -1855,7 +1867,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameObjectSpriteSheet_64
+      name: Particle_CoinBurst
       rect:
         serializedVersion: 2
         x: 306
@@ -1870,14 +1882,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 921a3232096e20b90800000000000000
-      internalID: -7277000541138083543
+      spriteID: 7914174f9451ce030800000000000000
+      internalID: 3525216015702114711
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameObjectSpriteSheet_65
+      name: Particle_Sparkle2
       rect:
         serializedVersion: 2
         x: 312
@@ -1892,8 +1904,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ab6aa07490d226650800000000000000
-      internalID: 6224587152849282746
+      spriteID: d52760d36320c3750800000000000000
+      internalID: 6285901611877691997
       vertices: []
       indices: 
       edges: []
@@ -2009,7 +2021,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GameObjectSpriteSheet_71
+      name: Particle_Sparkle3
       rect:
         serializedVersion: 2
         x: 339
@@ -2024,8 +2036,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ba2212256b430c4c0800000000000000
-      internalID: -4269354489080634709
+      spriteID: aa9aa7a2e7b2dc070800000000000000
+      internalID: 8128200723352168874
       vertices: []
       indices: 
       edges: []
@@ -2278,6 +2290,10 @@ TextureImporter:
       GameObjectSpriteSheet_76: -6784294719839342001
       GameObjectSpriteSheet_8: 1027570971152180869
       GameObjectSpriteSheet_9: -2982998155020343673
+      Particle_CoinBurst: 3525216015702114711
+      Particle_Sparkle1: 3268300186058770741
+      Particle_Sparkle2: 6285901611877691997
+      Particle_Sparkle3: 8128200723352168874
       TileBase: -609191760793043250
       UI_Coin: 7113788566708116642
       UI_Heart: 7581436541814298057

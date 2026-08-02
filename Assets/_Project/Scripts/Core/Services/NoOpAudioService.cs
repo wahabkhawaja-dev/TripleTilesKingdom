@@ -9,7 +9,7 @@ namespace Core.Services
     /// </summary>
     public sealed class NoOpAudioService : IAudioService
     {
-        public void PlaySfx(string clipKey, float volumeScale = 1f)
+        public void PlaySfx(string clipKey, float volumeScale = 1f, float pitch = 1f)
         {
         }
 

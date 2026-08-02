@@ -15,5 +15,6 @@ namespace Presentation
         public Sprite BaseTileSprite;
         public Sprite[] FruitSprites;
         public Sprite TrayBarSprite;
+        public Sprite[] ParticleSprites;
     }
 }

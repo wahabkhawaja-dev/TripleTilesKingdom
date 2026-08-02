@@ -39,6 +39,14 @@ namespace Core.Bootstrap
             await InitializeServicesAsync();
 
             SceneManager.LoadScene(_firstSceneName);
+
+            // Deliberately started after LoadScene, not before: calling AudioSource.Play
+            // on a DontDestroyOnLoad source in the same breath as an immediate scene
+            // transition can silently leave it not actually playing (isPlaying stays
+            // false, no error) — a real, reproducible engine timing quirk, not
+            // hypothetical. LoadScene is synchronous, so by the time it returns here the
+            // new scene is already active and it's safe to start the music.
+            GameServices.Audio.PlayMusic("BackgroundBGM");
         }
 
         /// <summary>
@@ -49,9 +57,11 @@ namespace Core.Bootstrap
         /// 3. Audio / Analytics / Haptics / EventBus — no dependency on each other, so
         ///    they're safe to construct last.
         ///
-        /// Save, Audio, and Content are currently no-op placeholders; see
-        /// NoOpSaveService, NoOpAudioService, and AddressablesService for why, and
-        /// ARCHITECTURE.md §19 / ROADMAP.md for when real implementations land.
+        /// Save and Content are currently no-op placeholders; see NoOpSaveService and
+        /// AddressablesService for why, and ARCHITECTURE.md §19 / ROADMAP.md for when
+        /// real implementations land. Audio is real (AudioService) — background music
+        /// starts here, once, for the whole app lifetime, rather than being re-triggered
+        /// by every scene that happens to load.
         /// </summary>
         private async Task InitializeServicesAsync()
         {
@@ -60,7 +70,7 @@ namespace Core.Bootstrap
             var addressablesService = new AddressablesService();
             await addressablesService.InitializeAsync();
 
-            var audioService = new NoOpAudioService();
+            var audioService = new AudioService();
             var analyticsService = new NoOpAnalyticsService();
             var hapticsService = new HapticsService();
             var eventBus = new EventBusImpl();

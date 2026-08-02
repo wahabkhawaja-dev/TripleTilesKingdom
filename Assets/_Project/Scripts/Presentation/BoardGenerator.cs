@@ -24,7 +24,7 @@ namespace Presentation
                 tiles.Add(new TileModel(idFactory.Next(), spawn.TileType, spawn.Coordinate));
             }
 
-            StackingResolver.ResolveStacking(tiles);
+            StackingResolver.ResolvePyramidStacking(tiles);
 
             return new BoardModel(tiles);
         }

@@ -40,3 +40,7 @@ MonoBehaviour:
   - {fileID: 343626808355802355, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
   - {fileID: 2515943915195201518, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
   TrayBarSprite: {fileID: 2138117490441824760, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  ParticleSprites:
+  - {fileID: 3268300186058770741, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 6285901611877691997, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 8128200723352168874, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
