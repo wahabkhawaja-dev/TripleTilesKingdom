@@ -2,7 +2,7 @@
 
 Living registry of every manager/service/event type, its owner, and its subscribers. Update this whenever a system, event type, or GameServices entry is added or changed. Cross-reference `ARCHITECTURE.md` for design rationale — this file is the current-state index, not the explanation.
 
-**Last updated:** 2026-08-01
+**Last updated:** 2026-08-03
 
 ## GameServices registrations (app-lifetime singletons)
 
@@ -10,12 +10,21 @@ Living registry of every manager/service/event type, its owner, and its subscrib
 |---|---|---|---|---|
 | EventBus | `Core.EventBus.IEventBus` | `Core.EventBus.EventBus` (real) | — | `GameRoot` |
 | Save | `Core.Services.ISaveService` | `NoOpSaveService` (placeholder) | Build order step 10 | `GameRoot` |
-| Audio | `Core.Services.IAudioService` | `NoOpAudioService` (placeholder) | Build order step 6 (Juice pass) | `GameRoot` |
+| Audio | `Core.Services.IAudioService` | `AudioService` (real — pooled sfx sources + looping BGM, sources scene-authored on `GameRoot`; see `DECISIONS.md` 2026-08-03) | — | `GameRoot` |
 | Content | `Core.Services.IAddressablesService` | `AddressablesService` (placeholder, no Addressables package integrated yet) | When Level System needs bundled/remote content | `GameRoot` |
 | Analytics | `Core.Services.IAnalyticsService` | `NoOpAnalyticsService` (placeholder) | Not yet scheduled — vendor TBD | `GameRoot` |
-| Haptics | `Core.Services.IHapticsService` | `HapticsService` (real, baseline `Handheld.Vibrate`) | Native amplitude-control plugin — future enhancement | `GameRoot` |
+| Haptics | `Core.Services.IHapticsService` | `HapticsService` (real — Android: `AndroidJavaObject` reflection against `VibrationEffect` for genuine per-strength amplitude/duration; iOS: `Handheld.Vibrate` on Heavy only. See `DECISIONS.md` 2026-08-03) | iOS Core Haptics amplitude control — not yet scheduled | `GameRoot` |
 
-All registered once, in this order, by `GameRoot.InitializeServicesAsync()`.
+All registered once, in this order, by `GameRoot.InitializeServicesAsync()`. `GameRoot` also owns the scene-authored `AudioListener` + `AudioSource` pool (`_musicSource`, `_sfxSources[6]`) passed into `AudioService`'s constructor, baked into `Bootstrap.unity` by `Tools > Build Game Scenes`.
+
+## Audio content (`AudioTheme_Default.asset`, `Core.Services.AudioThemeSO`)
+
+| Clip key | Trigger | Notes |
+|---|---|---|
+| `BackgroundBGM` | `GameRoot.Awake`, after first scene loads | Looping, started post-`LoadScene` (see `DECISIONS.md`/`CHANGELOG.md` 2026-08-03 for the pre-transition `Play()` timing quirk this avoids). |
+| `MenuButtonClick` | `Clickable.OnPointerClick` (any UI button with `_pressJuice = true`) | Tiles set `_pressJuice = false` so they don't double-fire this alongside `TileSelectSound`. |
+| `TileSelectSound` | `TileView.OnClicked` | Fires alongside `HapticStrength.Light`. |
+| `TilePopSound` | `TrayController.PlayMatchPopSequence` (per popped tile, on `OnComplete`) | Pitch ramps per pop index (`1f + index * 0.06f`, capped at `1.35f`); fires alongside `HapticStrength.Heavy`. |
 
 ## Scene-scoped systems (not in GameServices)
 
