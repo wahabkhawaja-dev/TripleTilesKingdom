@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813c03a1cdae295409aef1653ee20164, type: 3}
+  m_Name: TileTheme_Default
+  m_EditorClassIdentifier: Assembly-CSharp::Presentation.TileThemeSO
+  BaseTileSprite: {fileID: -609191760793043250, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  FruitSprites:
+  - {fileID: 8091419745613384719, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 287714186049020678, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -1478079262298624975, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 3247656374392622808, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -6478677970145442225, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 2103760168436752035, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -3001960365903900665, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 8022028294690901734, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 8550814107469945798, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -9146825901380179343, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -4056631935661258791, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 4447466397152600977, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -992988177061618844, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -8025547241919445094, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 2487168876533433425, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -3643893011672100033, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -4675702942056374730, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 4111083779110767337, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -810426679168827110, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -6090071761707314488, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -2879488347718582878, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 3603505521652053590, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: -8158955401895667424, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 343626808355802355, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  - {fileID: 2515943915195201518, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}
+  TrayBarSprite: {fileID: 2138117490441824760, guid: 57e4b2b09cec2fa4d877aa839eee67e7, type: 3}

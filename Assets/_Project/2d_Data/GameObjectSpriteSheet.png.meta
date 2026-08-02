@@ -1,0 +1,2291 @@
+fileFormatVersion: 2
+guid: 57e4b2b09cec2fa4d877aa839eee67e7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7509027303703039499
+    second: GameObjectSpriteSheet_0
+  - first:
+      213: -6979389898952350159
+    second: GameObjectSpriteSheet_1
+  - first:
+      213: 1033547879212642594
+    second: GameObjectSpriteSheet_2
+  - first:
+      213: -1344182331703668799
+    second: GameObjectSpriteSheet_3
+  - first:
+      213: -1486155648010315778
+    second: GameObjectSpriteSheet_4
+  - first:
+      213: -8872475634917629290
+    second: GameObjectSpriteSheet_5
+  - first:
+      213: -5387824019924226498
+    second: GameObjectSpriteSheet_6
+  - first:
+      213: 2013178390561907322
+    second: GameObjectSpriteSheet_7
+  - first:
+      213: 1027570971152180869
+    second: GameObjectSpriteSheet_8
+  - first:
+      213: -2982998155020343673
+    second: GameObjectSpriteSheet_9
+  - first:
+      213: 4274259613045607589
+    second: GameObjectSpriteSheet_10
+  - first:
+      213: -3088836600075118213
+    second: GameObjectSpriteSheet_11
+  - first:
+      213: -6560402675107123575
+    second: GameObjectSpriteSheet_12
+  - first:
+      213: -7143186158527689583
+    second: GameObjectSpriteSheet_13
+  - first:
+      213: -8089167391672523511
+    second: GameObjectSpriteSheet_14
+  - first:
+      213: 7598527331665409282
+    second: GameObjectSpriteSheet_15
+  - first:
+      213: 8925259203341096702
+    second: GameObjectSpriteSheet_16
+  - first:
+      213: -7825454839343260871
+    second: GameObjectSpriteSheet_17
+  - first:
+      213: 8556848508452683839
+    second: GameObjectSpriteSheet_18
+  - first:
+      213: 4346886435569216963
+    second: GameObjectSpriteSheet_19
+  - first:
+      213: -2826202281503296411
+    second: GameObjectSpriteSheet_20
+  - first:
+      213: -5410883143236504313
+    second: GameObjectSpriteSheet_21
+  - first:
+      213: -3181928906432545005
+    second: GameObjectSpriteSheet_22
+  - first:
+      213: 4194287083532285174
+    second: GameObjectSpriteSheet_23
+  - first:
+      213: 2389101121319503015
+    second: GameObjectSpriteSheet_24
+  - first:
+      213: -4597626580391537896
+    second: GameObjectSpriteSheet_25
+  - first:
+      213: -326841110080048726
+    second: GameObjectSpriteSheet_26
+  - first:
+      213: 7280256492251284353
+    second: GameObjectSpriteSheet_27
+  - first:
+      213: 610371602087855018
+    second: GameObjectSpriteSheet_28
+  - first:
+      213: 4474798896638376265
+    second: GameObjectSpriteSheet_29
+  - first:
+      213: -7399490114828211182
+    second: GameObjectSpriteSheet_30
+  - first:
+      213: -2057559535643174176
+    second: GameObjectSpriteSheet_31
+  - first:
+      213: 1333696557038581159
+    second: GameObjectSpriteSheet_32
+  - first:
+      213: -5784883172179382431
+    second: GameObjectSpriteSheet_33
+  - first:
+      213: -3791019017560304931
+    second: GameObjectSpriteSheet_34
+  - first:
+      213: -4373348842240799102
+    second: GameObjectSpriteSheet_35
+  - first:
+      213: -9104799165768584333
+    second: GameObjectSpriteSheet_36
+  - first:
+      213: -5994957658063894524
+    second: GameObjectSpriteSheet_37
+  - first:
+      213: 5388567689239132278
+    second: GameObjectSpriteSheet_38
+  - first:
+      213: -2190637588458721962
+    second: GameObjectSpriteSheet_39
+  - first:
+      213: 8338410768021952643
+    second: GameObjectSpriteSheet_40
+  - first:
+      213: 5543274084010493419
+    second: GameObjectSpriteSheet_41
+  - first:
+      213: 1170525860117359150
+    second: GameObjectSpriteSheet_42
+  - first:
+      213: 540604477533551208
+    second: GameObjectSpriteSheet_43
+  - first:
+      213: -1808916998696233760
+    second: GameObjectSpriteSheet_44
+  - first:
+      213: 2731237640123557183
+    second: GameObjectSpriteSheet_45
+  - first:
+      213: -6155695132279946559
+    second: GameObjectSpriteSheet_46
+  - first:
+      213: -3434067776548029697
+    second: GameObjectSpriteSheet_47
+  - first:
+      213: 4270429113325067998
+    second: GameObjectSpriteSheet_48
+  - first:
+      213: -8496184996624580078
+    second: GameObjectSpriteSheet_49
+  - first:
+      213: 441772216945328762
+    second: GameObjectSpriteSheet_50
+  - first:
+      213: 7045894499967531690
+    second: GameObjectSpriteSheet_51
+  - first:
+      213: 5558566698734275961
+    second: GameObjectSpriteSheet_52
+  - first:
+      213: 8870760016900324961
+    second: GameObjectSpriteSheet_53
+  - first:
+      213: 6388415735435742693
+    second: GameObjectSpriteSheet_54
+  - first:
+      213: -5667100839673980190
+    second: GameObjectSpriteSheet_55
+  - first:
+      213: 7846361746676380330
+    second: GameObjectSpriteSheet_56
+  - first:
+      213: -5591703158505836340
+    second: GameObjectSpriteSheet_57
+  - first:
+      213: -514189296040434410
+    second: GameObjectSpriteSheet_58
+  - first:
+      213: -3316969845471949663
+    second: GameObjectSpriteSheet_59
+  - first:
+      213: 730020011908020243
+    second: GameObjectSpriteSheet_60
+  - first:
+      213: 6375701116905942709
+    second: GameObjectSpriteSheet_61
+  - first:
+      213: 2183896185836832518
+    second: GameObjectSpriteSheet_62
+  - first:
+      213: 6902077177580660325
+    second: GameObjectSpriteSheet_63
+  - first:
+      213: -7277000541138083543
+    second: GameObjectSpriteSheet_64
+  - first:
+      213: 6224587152849282746
+    second: GameObjectSpriteSheet_65
+  - first:
+      213: -7400562924359756823
+    second: GameObjectSpriteSheet_66
+  - first:
+      213: 3180112195843794481
+    second: GameObjectSpriteSheet_67
+  - first:
+      213: 1948300522944827437
+    second: GameObjectSpriteSheet_68
+  - first:
+      213: -6912551625515695094
+    second: GameObjectSpriteSheet_69
+  - first:
+      213: -1994253753162650420
+    second: GameObjectSpriteSheet_70
+  - first:
+      213: -4269354489080634709
+    second: GameObjectSpriteSheet_71
+  - first:
+      213: 4582997707328026968
+    second: GameObjectSpriteSheet_72
+  - first:
+      213: -7420069272717740669
+    second: GameObjectSpriteSheet_73
+  - first:
+      213: -1155930091858748316
+    second: GameObjectSpriteSheet_74
+  - first:
+      213: 5030964787530681679
+    second: GameObjectSpriteSheet_75
+  - first:
+      213: -6784294719839342001
+    second: GameObjectSpriteSheet_76
+  - first:
+      213: -609191760793043250
+    second: TileBase
+  - first:
+      213: 8091419745613384719
+    second: Fruit_Strawberry
+  - first:
+      213: 287714186049020678
+    second: Fruit_Cherry
+  - first:
+      213: -1478079262298624975
+    second: Fruit_Blueberry
+  - first:
+      213: 3247656374392622808
+    second: Fruit_Grape
+  - first:
+      213: -6478677970145442225
+    second: Fruit_Orange
+  - first:
+      213: 2103760168436752035
+    second: Fruit_Apple
+  - first:
+      213: -3001960365903900665
+    second: Fruit_Banana
+  - first:
+      213: 8022028294690901734
+    second: Fruit_Pear
+  - first:
+      213: 8550814107469945798
+    second: Fruit_Peach
+  - first:
+      213: -9146825901380179343
+    second: Fruit_Pomegranate
+  - first:
+      213: -4056631935661258791
+    second: Fruit_Lemon
+  - first:
+      213: 4447466397152600977
+    second: Fruit_Watermelon
+  - first:
+      213: -992988177061618844
+    second: Fruit_Pineapple
+  - first:
+      213: -8025547241919445094
+    second: Fruit_Coconut
+  - first:
+      213: 2487168876533433425
+    second: Fruit_Kiwi
+  - first:
+      213: -3643893011672100033
+    second: Fruit_Avocado
+  - first:
+      213: -4675702942056374730
+    second: Fruit_Dragonfruit
+  - first:
+      213: 4111083779110767337
+    second: Fruit_Starfruit
+  - first:
+      213: -810426679168827110
+    second: Fruit_PurpleFlower
+  - first:
+      213: -6090071761707314488
+    second: Fruit_Daisy
+  - first:
+      213: -2879488347718582878
+    second: Fruit_Tulip
+  - first:
+      213: 3603505521652053590
+    second: Fruit_Leaf
+  - first:
+      213: -8158955401895667424
+    second: Fruit_MapleLeaf
+  - first:
+      213: 343626808355802355
+    second: Fruit_Acorn
+  - first:
+      213: 2138117490441824760
+    second: UI_TrayBar
+  - first:
+      213: 914302558105694185
+    second: UI_PlusButton
+  - first:
+      213: 7581436541814298057
+    second: UI_Heart
+  - first:
+      213: 7113788566708116642
+    second: UI_Coin
+  - first:
+      213: -1042448659406118325
+    second: UI_Star
+  - first:
+      213: 2515943915195201518
+    second: Fruit_Mushroom
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TileBase
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 344
+        width: 47
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecef5d93257bb87f0800000000000000
+      internalID: -609191760793043250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 344
+        width: 45
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 136eef38dd9342f90800000000000000
+      internalID: -6979389898952350159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 344
+        width: 43
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 221f3d6f156e75e00800000000000000
+      internalID: 1033547879212642594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 344
+        width: 42
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cf42758a41885de0800000000000000
+      internalID: -1344182331703668799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 344
+        width: 49
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef79767ef4d106be0800000000000000
+      internalID: -1486155648010315778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 349
+        width: 50
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6922d6e1b62aed480800000000000000
+      internalID: -8872475634917629290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Strawberry
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 356
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0c0ed1736f7a4070800000000000000
+      internalID: 8091419745613384719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Cherry
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 356
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 603ea40278a2ef300800000000000000
+      internalID: 287714186049020678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Blueberry
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 356
+        width: 37
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13ca1dcfdbecc7be0800000000000000
+      internalID: -1478079262298624975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Grape
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 355
+        width: 42
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8de8434044ef11d20800000000000000
+      internalID: 3247656374392622808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Orange
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 356
+        width: 40
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f46055f26bc1716a0800000000000000
+      internalID: -6478677970145442225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Apple
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 356
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aed94c1abe023d10800000000000000
+      internalID: 2103760168436752035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 286
+        width: 48
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98ea7b68684c4f4a0800000000000000
+      internalID: -6560402675107123575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 286
+        width: 45
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19c4878f80e4edc90800000000000000
+      internalID: -7143186158527689583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 286
+        width: 43
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 905afa29d118dbf80800000000000000
+      internalID: -8089167391672523511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 286
+        width: 43
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20573047954637960800000000000000
+      internalID: 7598527331665409282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 286
+        width: 48
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef69e6715f3ecdb70800000000000000
+      internalID: 8925259203341096702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 289
+        width: 49
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93b551fd846666390800000000000000
+      internalID: -7825454839343260871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Banana
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 310
+        width: 40
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7001f78c3f4e656d0800000000000000
+      internalID: -3001960365903900665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Pear
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 308
+        width: 36
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ee0f234b38f35f60800000000000000
+      internalID: 8022028294690901734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Peach
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 310
+        width: 40
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cb152860289aa670800000000000000
+      internalID: 8550814107469945798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Pomegranate
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 308
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17a64edfd42ff0180800000000000000
+      internalID: -9146825901380179343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Lemon
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 310
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d7c76a5fb2f3b7c0800000000000000
+      internalID: -4056631935661258791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Watermelon
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 310
+        width: 46
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19364c0ef1398bd30800000000000000
+      internalID: 4447466397152600977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_24
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 223
+        width: 50
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a48cb4dfcac72120800000000000000
+      internalID: 2389101121319503015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 225
+        width: 45
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8135ed10cf2f130c0800000000000000
+      internalID: -4597626580391537896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_26
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 225
+        width: 44
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa13fa7fdb3d67bf0800000000000000
+      internalID: -326841110080048726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_27
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 226
+        width: 43
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1838e5e05baa80560800000000000000
+      internalID: 7280256492251284353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_28
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 226
+        width: 47
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa3ce6bfcb9787800800000000000000
+      internalID: 610371602087855018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_29
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 226
+        width: 43
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 949b07353eda91e30800000000000000
+      internalID: 4474798896638376265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Pineapple
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 260
+        width: 35
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46b541893823832f0800000000000000
+      internalID: -992988177061618844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Coconut
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 261
+        width: 40
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a97864dfd478f9090800000000000000
+      internalID: -8025547241919445094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Kiwi
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 263
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 154ce266ae2348220800000000000000
+      internalID: 2487168876533433425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Avocado
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 261
+        width: 35
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3391cfac9a4e6dc0800000000000000
+      internalID: -3643893011672100033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Dragonfruit
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 261
+        width: 39
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63e1b7772f09c1fb0800000000000000
+      internalID: -4675702942056374730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Starfruit
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 261
+        width: 43
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ea84c76ae08d0930800000000000000
+      internalID: 4111083779110767337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_PurpleFlower
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 216
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1184a7aa39c0c4f0800000000000000
+      internalID: -810426679168827110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Daisy
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 215
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c25cc2dff7bb7ba0800000000000000
+      internalID: -6090071761707314488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Tulip
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 216
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ad7b5b9a900a08d0800000000000000
+      internalID: -2879488347718582878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Leaf
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 219
+        width: 35
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 656ba340e29320230800000000000000
+      internalID: 3603505521652053590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_MapleLeaf
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 215
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02911cb3a4195ce80800000000000000
+      internalID: -8158955401895667424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Acorn
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 218
+        width: 30
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fc4957f2cec4c400800000000000000
+      internalID: 343626808355802355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_TrayBar
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 155
+        width: 296
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f9a5d1878e1cad10800000000000000
+      internalID: 2138117490441824760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_PlusButton
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 166
+        width: 32
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9efee19155140bc00800000000000000
+      internalID: 914302558105694185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_44
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 157
+        width: 43
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e49b80e29f65e6e0800000000000000
+      internalID: -1808916998696233760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_45
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 157
+        width: 43
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f35adb8b92e47e520800000000000000
+      internalID: 2731237640123557183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_46
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 157
+        width: 43
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c24ad634e3929aa0800000000000000
+      internalID: -6155695132279946559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_47
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 17
+        width: 138
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffa3d3c3d8db750d0800000000000000
+      internalID: -3434067776548029697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_48
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 102
+        width: 42
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ede1a3227ac934b30800000000000000
+      internalID: 4270429113325067998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_49
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 103
+        width: 41
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2124032a2cc771a80800000000000000
+      internalID: -8496184996624580078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_50
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 103
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a72c9ae9d7d712600800000000000000
+      internalID: 441772216945328762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Heart
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 107
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c5d10add5ca63960800000000000000
+      internalID: 7581436541814298057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Coin
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 105
+        width: 36
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ac5fddc20149b260800000000000000
+      internalID: 7113788566708116642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Star
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 108
+        width: 35
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b422487a77a7881f0800000000000000
+      internalID: -1042448659406118325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_54
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 106
+        width: 40
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5edc92c934638a850800000000000000
+      internalID: 6388415735435742693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_55
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 106
+        width: 42
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea1ae8dfc96a51b0800000000000000
+      internalID: -5667100839673980190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_56
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 105
+        width: 44
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa2fbd1df60e3ec60800000000000000
+      internalID: 7846361746676380330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_57
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 105
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc074db7a974662b0800000000000000
+      internalID: -5591703158505836340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_58
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 615a33e3f8b3dd8f0800000000000000
+      internalID: -514189296040434410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_59
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 68
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ac46f5ef71c7f1d0800000000000000
+      internalID: -3316969845471949663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_60
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 72
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31834b0455d812a00800000000000000
+      internalID: 730020011908020243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_61
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 74
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5be6d3bc26a0b7850800000000000000
+      internalID: 6375701116905942709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_62
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 61
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 607822f9202ce4e10800000000000000
+      internalID: 2183896185836832518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_63
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 55
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 566a60ecf9a19cf50800000000000000
+      internalID: 6902077177580660325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_64
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 36
+        width: 50
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 921a3232096e20b90800000000000000
+      internalID: -7277000541138083543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_65
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 55
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab6aa07490d226650800000000000000
+      internalID: 6224587152849282746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_66
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 17
+        width: 48
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e35c9bea3beb4990800000000000000
+      internalID: -7400562924359756823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_67
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 17
+        width: 47
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13628237137022c20800000000000000
+      internalID: 3180112195843794481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_68
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 16
+        width: 44
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2095d9c001c90b10800000000000000
+      internalID: 1948300522944827437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_69
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 38
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a04869dbbeea110a0800000000000000
+      internalID: -6912551625515695094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_70
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 31
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccc20ca07ccf254e0800000000000000
+      internalID: -1994253753162650420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_71
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 29
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2212256b430c4c0800000000000000
+      internalID: -4269354489080634709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_72
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 23
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85977bf02241a9f30800000000000000
+      internalID: 4582997707328026968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_73
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 23
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3853ed64f4e960990800000000000000
+      internalID: -7420069272717740669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_74
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 22
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46c1391b4bf45ffe0800000000000000
+      internalID: -1155930091858748316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_75
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 22
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4dc34ea1d391d540800000000000000
+      internalID: 5030964787530681679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GameObjectSpriteSheet_76
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 22
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f42fa64a5e759d1a0800000000000000
+      internalID: -6784294719839342001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fruit_Mushroom
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 218
+        width: 32
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee7f30c29ad6ae220800000000000000
+      internalID: 2515943915195201518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Fruit_Acorn: 343626808355802355
+      Fruit_Apple: 2103760168436752035
+      Fruit_Avocado: -3643893011672100033
+      Fruit_Banana: -3001960365903900665
+      Fruit_Blueberry: -1478079262298624975
+      Fruit_Cherry: 287714186049020678
+      Fruit_Coconut: -8025547241919445094
+      Fruit_Daisy: -6090071761707314488
+      Fruit_Dragonfruit: -4675702942056374730
+      Fruit_Grape: 3247656374392622808
+      Fruit_Kiwi: 2487168876533433425
+      Fruit_Leaf: 3603505521652053590
+      Fruit_Lemon: -4056631935661258791
+      Fruit_MapleLeaf: -8158955401895667424
+      Fruit_Mushroom: 2515943915195201518
+      Fruit_Orange: -6478677970145442225
+      Fruit_Peach: 8550814107469945798
+      Fruit_Pear: 8022028294690901734
+      Fruit_Pineapple: -992988177061618844
+      Fruit_Pomegranate: -9146825901380179343
+      Fruit_PurpleFlower: -810426679168827110
+      Fruit_Starfruit: 4111083779110767337
+      Fruit_Strawberry: 8091419745613384719
+      Fruit_Tulip: -2879488347718582878
+      Fruit_Watermelon: 4447466397152600977
+      GameObjectSpriteSheet_0: -7509027303703039499
+      GameObjectSpriteSheet_1: -6979389898952350159
+      GameObjectSpriteSheet_10: 4274259613045607589
+      GameObjectSpriteSheet_11: -3088836600075118213
+      GameObjectSpriteSheet_12: -6560402675107123575
+      GameObjectSpriteSheet_13: -7143186158527689583
+      GameObjectSpriteSheet_14: -8089167391672523511
+      GameObjectSpriteSheet_15: 7598527331665409282
+      GameObjectSpriteSheet_16: 8925259203341096702
+      GameObjectSpriteSheet_17: -7825454839343260871
+      GameObjectSpriteSheet_18: 8556848508452683839
+      GameObjectSpriteSheet_19: 4346886435569216963
+      GameObjectSpriteSheet_2: 1033547879212642594
+      GameObjectSpriteSheet_20: -2826202281503296411
+      GameObjectSpriteSheet_21: -5410883143236504313
+      GameObjectSpriteSheet_22: -3181928906432545005
+      GameObjectSpriteSheet_23: 4194287083532285174
+      GameObjectSpriteSheet_24: 2389101121319503015
+      GameObjectSpriteSheet_25: -4597626580391537896
+      GameObjectSpriteSheet_26: -326841110080048726
+      GameObjectSpriteSheet_27: 7280256492251284353
+      GameObjectSpriteSheet_28: 610371602087855018
+      GameObjectSpriteSheet_29: 4474798896638376265
+      GameObjectSpriteSheet_3: -1344182331703668799
+      GameObjectSpriteSheet_30: -7399490114828211182
+      GameObjectSpriteSheet_31: -2057559535643174176
+      GameObjectSpriteSheet_32: 1333696557038581159
+      GameObjectSpriteSheet_33: -5784883172179382431
+      GameObjectSpriteSheet_34: -3791019017560304931
+      GameObjectSpriteSheet_35: -4373348842240799102
+      GameObjectSpriteSheet_36: -9104799165768584333
+      GameObjectSpriteSheet_37: -5994957658063894524
+      GameObjectSpriteSheet_38: 5388567689239132278
+      GameObjectSpriteSheet_39: -2190637588458721962
+      GameObjectSpriteSheet_4: -1486155648010315778
+      GameObjectSpriteSheet_40: 8338410768021952643
+      GameObjectSpriteSheet_41: 5543274084010493419
+      GameObjectSpriteSheet_42: 1170525860117359150
+      GameObjectSpriteSheet_43: 540604477533551208
+      GameObjectSpriteSheet_44: -1808916998696233760
+      GameObjectSpriteSheet_45: 2731237640123557183
+      GameObjectSpriteSheet_46: -6155695132279946559
+      GameObjectSpriteSheet_47: -3434067776548029697
+      GameObjectSpriteSheet_48: 4270429113325067998
+      GameObjectSpriteSheet_49: -8496184996624580078
+      GameObjectSpriteSheet_5: -8872475634917629290
+      GameObjectSpriteSheet_50: 441772216945328762
+      GameObjectSpriteSheet_51: 7045894499967531690
+      GameObjectSpriteSheet_52: 5558566698734275961
+      GameObjectSpriteSheet_53: 8870760016900324961
+      GameObjectSpriteSheet_54: 6388415735435742693
+      GameObjectSpriteSheet_55: -5667100839673980190
+      GameObjectSpriteSheet_56: 7846361746676380330
+      GameObjectSpriteSheet_57: -5591703158505836340
+      GameObjectSpriteSheet_58: -514189296040434410
+      GameObjectSpriteSheet_59: -3316969845471949663
+      GameObjectSpriteSheet_6: -5387824019924226498
+      GameObjectSpriteSheet_60: 730020011908020243
+      GameObjectSpriteSheet_61: 6375701116905942709
+      GameObjectSpriteSheet_62: 2183896185836832518
+      GameObjectSpriteSheet_63: 6902077177580660325
+      GameObjectSpriteSheet_64: -7277000541138083543
+      GameObjectSpriteSheet_65: 6224587152849282746
+      GameObjectSpriteSheet_66: -7400562924359756823
+      GameObjectSpriteSheet_67: 3180112195843794481
+      GameObjectSpriteSheet_68: 1948300522944827437
+      GameObjectSpriteSheet_69: -6912551625515695094
+      GameObjectSpriteSheet_7: 2013178390561907322
+      GameObjectSpriteSheet_70: -1994253753162650420
+      GameObjectSpriteSheet_71: -4269354489080634709
+      GameObjectSpriteSheet_72: 4582997707328026968
+      GameObjectSpriteSheet_73: -7420069272717740669
+      GameObjectSpriteSheet_74: -1155930091858748316
+      GameObjectSpriteSheet_75: 5030964787530681679
+      GameObjectSpriteSheet_76: -6784294719839342001
+      GameObjectSpriteSheet_8: 1027570971152180869
+      GameObjectSpriteSheet_9: -2982998155020343673
+      TileBase: -609191760793043250
+      UI_Coin: 7113788566708116642
+      UI_Heart: 7581436541814298057
+      UI_PlusButton: 914302558105694185
+      UI_Star: -1042448659406118325
+      UI_TrayBar: 2138117490441824760
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
