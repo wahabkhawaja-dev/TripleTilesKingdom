@@ -52,7 +52,7 @@ namespace Presentation
             UIParticleBurst.BurstSparkle(transform, transform.position, count: 5, duration: 0.3f, distance: 40f);
             if (GameServices.IsRegistered)
             {
-                GameServices.Haptics.Play(HapticStrength.Medium);
+                GameServices.Haptics.Play(HapticStrength.Light);
                 GameServices.Audio.PlaySfx("TileSelectSound");
             }
         }
