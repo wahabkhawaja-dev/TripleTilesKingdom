@@ -29,6 +29,11 @@ namespace Editor
         [MenuItem("Tools/Build Game Scenes")]
         public static void BuildGameScenes()
         {
+            // Sprite tile prefab must exist before any scene that spawns tiles
+            // opens; also catches "stale UI-based prefab on disk" after pulling
+            // the sprite conversion.
+            TilePrefabBuilder.Rebuild();
+
             BuildScene("Assets/Scenes/Splash.unity", "SplashScreenUI", typeof(Presentation.UI.SplashScreenUI));
             BuildScene("Assets/Scenes/Bootstrap.unity", "GameRoot", typeof(Core.Bootstrap.GameRoot));
             BuildScene("Assets/Scenes/MainMenu.unity", "MainMenuUI", typeof(Presentation.UI.MainMenuUI));

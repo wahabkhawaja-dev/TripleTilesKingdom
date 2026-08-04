@@ -11,7 +11,8 @@ Phased build order, mirrored from `ARCHITECTURE.md` §19. Check items off as the
 - [x] **5. Match detection + win/lose flow**
 - [x] **6. Juice pass** — PrimeTween (project uses PrimeTween, not DOTween), particle bursts, real per-strength haptics (Android amplitude control), real `AudioService` (BGM loop + UI/tile/pop sfx with pitch variation). Camera feedback not yet added.
 - [x] **7. UI layer** — HUD, popups, splash screen (tray-based loading visual), portrait `CanvasScaler` fix, new sprite-sheet-based UI theme.
-- [ ] **8. Image-based level generation pipeline**
+- [x] **7.5 SO-driven Level System (manual authoring path)** — `LevelDefinitionSO`, `LevelPresetSO`, `LevelCollectionSO`, `LevelDefinitionBuilder`, `Tools ▸ Level Designer` editor window with per-layer pyramid preview and presets. Runtime picks up `Resources/Levels/LevelCollection.asset` automatically; procedural `LevelGenerator` remains as a fallback. See `LEVEL_SYSTEM.md`.
+- [ ] **8. Image-based level generation pipeline** — image → `List<BoardCoordinate>` slots in as a second layout source; consumes the same `LevelDefinitionBuilder` output shape.
 - [ ] **9. Theme system**
 - [ ] **10. Save system** — real `ISaveService` implementation.
 - [ ] **11. Obstacle system extension point + first obstacle** (e.g. Locked Tile) as a proof of the extensibility model.

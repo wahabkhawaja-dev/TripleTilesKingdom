@@ -1,3 +1,4 @@
+using LevelSystem.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,14 +9,18 @@ namespace Presentation.UI
     /// Level Select UI. Prefers a scene-authored Canvas/background/ribbon/back button and
     /// scroll structure (built once by Tools > Build Game Scenes and saved into
     /// LevelSelect.unity — hand-editable in the Inspector) — falls back to procedural
-    /// construction via UIFactory only if those references are missing. The 50 level
-    /// buttons are always instantiated at runtime into whichever Content transform is in
-    /// use, since their unlock state is data-driven and there's no static "correct" set
-    /// to hand-author.
+    /// construction via UIFactory only if those references are missing. The level
+    /// buttons themselves are always instantiated at runtime because their unlock
+    /// state is per-save-file data, but their count comes from the authored
+    /// LevelCollectionSO — one button per level asset, not a hardcoded number.
     /// </summary>
     public sealed class LevelSelectUI : MonoBehaviour
     {
-        private const int MaxLevels = 50;
+        // Fallback used only for scene-layout sizing when no collection has been
+        // authored yet (shows the shell so the level-select screen doesn't render
+        // empty in that failure mode). The runtime button count is always
+        // collection.Count when a collection is present.
+        private const int FallbackButtonCount = 50;
         private const int Columns = 5;
         private const float CellWidth = 200f;
         private const float CellHeight = 100f;
@@ -118,7 +123,7 @@ namespace Presentation.UI
             grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
             grid.constraintCount = Columns;
 
-            var rows = Mathf.CeilToInt(MaxLevels / (float)Columns);
+            var rows = Mathf.CeilToInt(FallbackButtonCount / (float)Columns);
             var contentHeight = rows * CellHeight + (rows - 1) * Spacing + 20f;
             _content.sizeDelta = new Vector2(Columns * CellWidth + (Columns - 1) * Spacing, contentHeight);
         }
@@ -126,8 +131,23 @@ namespace Presentation.UI
         private void CreateLevelButtons(Transform container, UIThemeSO theme)
         {
             var highestUnlocked = PlayerPrefs.GetInt("HighestUnlockedLevel", 0);
+            var collection = Resources.Load<LevelCollectionSO>("Levels/LevelCollection");
+            var levelCount = collection != null && collection.Count > 0 ? collection.Count : 0;
 
-            for (var i = 0; i < MaxLevels; i++)
+            if (levelCount == 0)
+            {
+                Debug.LogWarning("[LevelSelectUI] No LevelCollection at Resources/Levels/LevelCollection.asset — level select is empty. Open Tools ▸ Level Designer to author levels.");
+                return;
+            }
+
+            // Content height also depends on the actual level count now — resize so
+            // the scroll extent matches, otherwise the last row can hide behind the
+            // viewport mask.
+            var rows = Mathf.CeilToInt(levelCount / (float)Columns);
+            var contentHeight = rows * CellHeight + (rows - 1) * Spacing + 20f;
+            _content.sizeDelta = new Vector2(_content.sizeDelta.x, contentHeight);
+
+            for (var i = 0; i < levelCount; i++)
             {
                 var levelIndex = i;
                 var isUnlocked = i <= highestUnlocked;

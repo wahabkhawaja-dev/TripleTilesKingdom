@@ -26,6 +26,20 @@ All registered once, in this order, by `GameRoot.InitializeServicesAsync()`. `Ga
 | `TileSelectSound` | `TileView.OnClicked` | Fires alongside `HapticStrength.Light`. |
 | `TilePopSound` | `TrayController.PlayMatchPopSequence` (per popped tile, on `OnComplete`) | Pitch ramps per pop index (`1f + index * 0.06f`, capped at `1.35f`); fires alongside `HapticStrength.Heavy`. |
 
+## Presentation (world-space sprites for gameplay, uGUI for HUD)
+
+Board and tray are world-space `SpriteRenderer` hierarchies; HUD stays on a Screen-Space Overlay Canvas. Draw order is driven by explicit `sortingOrder` — never by sibling index or transform.z — so stacked pyramid layers never fight each other for visibility.
+
+| SortingOrder band | Content |
+|---|---|
+| `layer × 10` .. `layer × 10 + 1` | Board tile base + fruit at layer L (up to ~100 for a 10-layer pyramid) |
+| 500 | Tray bar |
+| 501 / 502 | Tray slot backgrounds / icons |
+| 1500 | Flying tile mid-fly (reparented under `FlyLayer`) |
+| Overlay canvas | HUD (always on top of the world) |
+
+Tap flow (`Presentation.GameFlowController.OnTileSelected`): model mutations happen up-front (tray insert, board select, match evaluation), the tile physically flies to its slot via `BoardController.FlyTileToSlot`, and every visible response (`TrayController.ShowSlotIcon`, `TrayController.Refresh`, `BoardController.Refresh`, next-turn unlock) is deferred to the fly's landing callback so the tile is *there* before the tray reveals its icon or the match pops.
+
 ## Scene-scoped systems (not in GameServices)
 
 | System | Type | Constructed by | Notes |
@@ -49,6 +63,20 @@ No MonoBehaviours, no `UnityEngine` dependency. Constructed by whatever loads a 
 | `MatchResult`, `IMatchRule`, `ExactCountMatchRule`, `MatchSystem` | `Domain.Matching` | Pure match query against `ITrayView`; swappable rule strategy. |
 | `TileSpawnData`, `LevelRuleSet`, `LevelModel` | `Domain.Levels` | Pure-data level definition: baked layout, tray size, match count, theme id, extensible rule bag. |
 | `BoardState`, `BoardStateMachine` | `Domain.State` | Guarded gameplay flow state machine (Loading/Ready/Animating/Paused/Won/Lost). |
+
+## Level System (SO-driven, `LevelSystem/*`)
+
+Data-only ScriptableObjects that designers author, and one builder that converts them into a `Domain.Levels.LevelModel`. Runtime path: `GameFlowController.InitializeGame` loads `Resources/Levels/LevelCollection.asset` and calls `LevelDefinitionBuilder.Build(...)`; if the asset is missing it falls back to the procedural `LevelGenerator`. See `LEVEL_SYSTEM.md` for the full guide.
+
+| Type | Namespace | Role |
+|---|---|---|
+| `LayerDefinition` | `LevelSystem.Data` | One rectangular grid layer (Width, Height, Offset, AutoCenter). |
+| `LevelDefinitionSO` | `LevelSystem.Data` | One level asset: rules, content knobs, layer list, optional preset template. |
+| `LevelPresetSO` | `LevelSystem.Data` | Reusable shape preset (PyramidShrink / TowerFlat / DoublePyramid / Custom). |
+| `LevelCollectionSO` | `LevelSystem.Data` | Ordered list of `LevelDefinitionSO`s. Runtime picks `Resources/Levels/LevelCollection.asset`. |
+| `LevelDefinitionBuilder` | `LevelSystem.Generation` | Converts SO → `LevelModel`; clamps oversize upper layers, trims tail cells for MatchCount divisibility, deterministic shuffle from Seed. |
+| `LevelDesignerWindow` (Editor) | `LevelSystem.EditorTools` | `Tools ▸ Level Designer` — collection + level authoring with preview and preset apply. |
+| `LevelDefinitionSOEditor` (Editor) | `LevelSystem.EditorTools` | Custom inspector: apply preset, reset, live pyramid preview, validation. |
 
 ## Event types (`IGameEvent` implementations, event bus)
 

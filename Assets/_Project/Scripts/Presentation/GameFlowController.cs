@@ -6,6 +6,8 @@ using Domain.Levels;
 using Domain.Matching;
 using Domain.State;
 using Domain.Tray;
+using LevelSystem.Data;
+using LevelSystem.Generation;
 using Presentation.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,15 +17,18 @@ using UnityEngine.SceneManagement;
 namespace Presentation
 {
     /// <summary>
-    /// Orchestrates the complete gameplay loop. Prefers a scene-authored presentation
-    /// hierarchy (Canvas/BoardRoot/TrayRoot/HUD built once by Tools > Build Game Scenes
-    /// and saved into Gameplay.unity, so it's hand-editable in the Inspector like any
-    /// other scene content) — falls back to runtime construction via UIFactory only if
-    /// those references are missing, so the scene never breaks if it hasn't been
-    /// (re)built yet.
-    /// Connects Domain models to Presentation views. Handles: tile selection, match
-    /// detection, board updates, tray updates, win/lose conditions, and the
-    /// Shuffle/Hint/Hammer/Undo power-ups.
+    /// Orchestrates the complete gameplay loop. Board + tray are world-space
+    /// sprites (see <see cref="BoardController"/> / <see cref="TrayController"/>);
+    /// HUD stays uGUI on a Screen-Space Overlay Canvas. Clicks on the sprite
+    /// tiles come through the EventSystem via a <see cref="Physics2DRaycaster"/>
+    /// on the gameplay camera — same input pipeline as the HUD, no separate
+    /// polling.
+    ///
+    /// Tap flow (see <see cref="OnTileSelected"/>): domain mutations happen
+    /// up-front so state is always consistent, but every visible response
+    /// (slot-icon reveal, match pop, board refresh, next-turn unlock) is
+    /// deferred to the flying tile's landing callback — that's what makes the
+    /// tile feel like it truly arrives at the tray instead of teleporting in.
     /// </summary>
     public sealed class GameFlowController : MonoBehaviour
     {
@@ -31,8 +36,14 @@ namespace Presentation
         [SerializeField] private BoardController _boardController;
         [SerializeField] private TrayController _trayController;
         [SerializeField] private GameplayHUD _hud;
-        [SerializeField] private RectTransform _boardRoot;
-        [SerializeField] private RectTransform _trayRoot;
+        [SerializeField] private Transform _boardRoot;
+        [SerializeField] private Transform _trayRoot;
+        [SerializeField] private Camera _gameCamera;
+
+        [Header("Camera framing (world units, portrait)")]
+        [SerializeField] private float _cameraOrthoSize = 8f;
+        [SerializeField] private Vector3 _boardWorldPosition = new Vector3(0f, 2f, 0f);
+        [SerializeField] private Vector3 _trayWorldPosition = new Vector3(0f, -4.5f, 0f);
 
         private BoardModel _board;
         private TrayModel _tray;
@@ -44,6 +55,14 @@ namespace Presentation
         private int _currentLevelIndex;
         private bool _isGameOver;
 
+        /// <summary>
+        /// Number of tiles currently mid-fly. Rapid taps queue up multiple
+        /// concurrent flies (this counter tracks them so ResolveTurnOutcome
+        /// only fires once the last one lands — otherwise the state machine
+        /// bounces Animating→Ready→Animating between overlapping tiles).
+        /// </summary>
+        private int _pendingFlies;
+
         /// <summary>Every tile successfully selected through the tray, in order — replayed minus the last entry to implement Undo without needing reversible Domain mutations.</summary>
         private readonly List<TileId> _moveHistory = new();
 
@@ -51,52 +70,91 @@ namespace Presentation
 
         private void Awake()
         {
+            EnsureCamera();
+            EnsureEventSystem();
+
             if (_boardController == null || _trayController == null || _hud == null)
             {
                 BuildFallbackScenePresentation();
             }
+        }
 
-            if (FindFirstObjectByType<Camera>() == null)
+        private void EnsureCamera()
+        {
+            if (_gameCamera == null) _gameCamera = Camera.main;
+            if (_gameCamera == null)
             {
                 var camGO = new GameObject("MainCamera");
-                var cam = camGO.AddComponent<Camera>();
-                cam.orthographic = true;
-                cam.orthographicSize = 5;
-                cam.clearFlags = CameraClearFlags.SolidColor;
-                cam.backgroundColor = new Color(0.12f, 0.12f, 0.18f);
                 camGO.tag = "MainCamera";
+                _gameCamera = camGO.AddComponent<Camera>();
+                camGO.AddComponent<AudioListener>();
+                _gameCamera.transform.position = new Vector3(0f, 0f, -10f);
             }
 
-            if (FindFirstObjectByType<EventSystem>() == null)
+            _gameCamera.orthographic = true;
+            _gameCamera.orthographicSize = _cameraOrthoSize;
+            _gameCamera.clearFlags = CameraClearFlags.SolidColor;
+            _gameCamera.backgroundColor = new Color(0.10f, 0.10f, 0.16f);
+            _gameCamera.nearClipPlane = -30f;
+            _gameCamera.farClipPlane = 30f;
+
+            // The Physics2DRaycaster is what lets sprite tiles receive
+            // IPointerClickHandler.OnPointerClick through the same EventSystem
+            // pipeline as the HUD. Without this component, clicks on tiles do
+            // nothing (which was the exact regression the last iteration hit).
+            if (_gameCamera.GetComponent<Physics2DRaycaster>() == null)
             {
-                var es = new GameObject("EventSystem");
-                es.AddComponent<EventSystem>();
-                es.AddComponent<InputSystemUIInputModule>();
+                _gameCamera.gameObject.AddComponent<Physics2DRaycaster>();
             }
         }
 
-        /// <summary>Original runtime-construction path, used only when scene-authored refs are missing.</summary>
+        private void EnsureEventSystem()
+        {
+            if (FindFirstObjectByType<EventSystem>() != null) return;
+            var es = new GameObject("EventSystem");
+            es.AddComponent<EventSystem>();
+            es.AddComponent<InputSystemUIInputModule>();
+        }
+
+        /// <summary>
+        /// World-space board + tray, HUD on a Screen-Space Overlay Canvas.
+        /// Same scene topology <c>Tools ▸ Build Game Scenes</c> bakes into
+        /// Gameplay.unity, kept in code as a safety net so the scene never
+        /// breaks in Play mode between rebuilds.
+        /// </summary>
         private void BuildFallbackScenePresentation()
         {
-            var canvas = UIFactory.CreateScreenCanvas("GameplayCanvas");
-            canvas.transform.SetParent(transform, false);
+            if (_boardRoot == null)
+            {
+                var boardGO = new GameObject("BoardRoot");
+                boardGO.transform.SetParent(transform, false);
+                boardGO.transform.position = _boardWorldPosition;
+                _boardRoot = boardGO.transform;
+            }
+            if (_boardController == null)
+            {
+                _boardController = _boardRoot.gameObject.AddComponent<BoardController>();
+            }
 
-            // Vertical layout budget (canvas is ~1920 units tall — see UIFactory's
-            // portrait CanvasScaler reference resolution — so safe content range is
-            // roughly -900..900): status bar/pause/replay at 860, board centered around
-            // 150 (its own pyramid shift adds height above that), tray at -500,
-            // power-up row at -780 — chosen with enough clearance that the (now larger)
-            // board, tray, and power-ups never overlap.
-            _boardRoot = UIFactory.CreateContainer(canvas.transform, "BoardRoot");
-            _boardRoot.anchoredPosition = new Vector2(0, 150);
-            _boardController = _boardRoot.gameObject.AddComponent<BoardController>();
+            if (_trayRoot == null)
+            {
+                var trayGO = new GameObject("TrayRoot");
+                trayGO.transform.SetParent(transform, false);
+                trayGO.transform.position = _trayWorldPosition;
+                _trayRoot = trayGO.transform;
+            }
+            if (_trayController == null)
+            {
+                _trayController = _trayRoot.gameObject.AddComponent<TrayController>();
+            }
 
-            _trayRoot = UIFactory.CreateContainer(canvas.transform, "TrayRoot");
-            _trayRoot.anchoredPosition = new Vector2(0, -500);
-            _trayController = _trayRoot.gameObject.AddComponent<TrayController>();
-
-            var hudRoot = UIFactory.CreateFullScreenContainer(canvas.transform, "HUD");
-            _hud = hudRoot.gameObject.AddComponent<GameplayHUD>();
+            if (_hud == null)
+            {
+                var canvas = UIFactory.CreateScreenCanvas("HUDCanvas");
+                canvas.transform.SetParent(transform, false);
+                var hudRoot = UIFactory.CreateFullScreenContainer(canvas.transform, "HUD");
+                _hud = hudRoot.gameObject.AddComponent<GameplayHUD>();
+            }
         }
 
         private void Start()
@@ -107,7 +165,16 @@ namespace Presentation
         private void InitializeGame()
         {
             _currentLevelIndex = PlayerPrefs.GetInt("LevelToPlay", 0);
-            _level = LevelGenerator.GenerateLevel(_currentLevelIndex);
+
+            var collection = Resources.Load<LevelCollectionSO>("Levels/LevelCollection");
+            if (collection == null || collection.Count == 0)
+            {
+                Debug.LogError("[GameFlowController] No LevelCollection at Resources/Levels/LevelCollection.asset — open Tools ▸ Level Designer and click Batch Generate.");
+                return;
+            }
+
+            var def = collection.Get(_currentLevelIndex);
+            _level = LevelDefinitionBuilder.Build(def);
 
             _tileTheme = Resources.Load<TileThemeSO>("TileTheme_Default");
             var typeCount = _level.TileLayout.Select(t => t.TileType.Value).Distinct().Count();
@@ -115,12 +182,11 @@ namespace Presentation
 
             _board = BoardGenerator.CreateBoard(_level);
             _tray = new TrayModel(_level.TraySize);
-            _stateMachine = new BoardStateMachine(); // starts in Loading
+            _stateMachine = new BoardStateMachine();
             _matchSystem = new MatchSystem(new ConsecutiveMatchRule(_level.MatchCount));
             _moveHistory.Clear();
 
-            var flyTarget = _trayRoot.anchoredPosition - _boardRoot.anchoredPosition;
-            _boardController.Initialize(_board, _fruitSprites, flyTarget, OnTileSelected);
+            _boardController.Initialize(_board, _tileTheme.BaseTileSprite, _fruitSprites, OnTileSelected);
             _trayController.Initialize(_tray, _tileTheme, _fruitSprites);
             _hud.Initialize(this, _level, _currentLevelIndex);
 
@@ -128,23 +194,30 @@ namespace Presentation
             _stateMachine.TrySetState(BoardState.Ready);
         }
 
+        /// <summary>
+        /// Tap handler. Accepts taps during Animating (another tile is still
+        /// flying) so rapid multi-selections work — each tile is processed
+        /// domain-side immediately and flies independently. Domain mutations
+        /// happen up-front; every visible response (slot-icon reveal, match
+        /// pop, board refresh, next-turn unlock) fires in the fly-landing
+        /// callback so the tile is physically there before anything visible
+        /// changes.
+        /// </summary>
         private void OnTileSelected(TileId tileId)
         {
-            if (_isGameOver || _stateMachine.Current != BoardState.Ready)
-                return;
+            if (_isGameOver) return;
+            var state = _stateMachine.Current;
+            if (state == BoardState.Paused || state == BoardState.Won || state == BoardState.Lost || state == BoardState.Loading) return;
+            if (!_board.TryGetTile(tileId, out var tile) || !tile.IsSelectable) return;
 
-            if (!_board.TryGetTile(tileId, out var tile) || !tile.IsSelectable)
-                return;
-
-            if (!_stateMachine.TrySetState(BoardState.Animating))
-                return;
+            // Move to Animating on the first tap of a burst; subsequent taps in
+            // the same burst stay in Animating (transition is a no-op).
+            if (state == BoardState.Ready) _stateMachine.TrySetState(BoardState.Animating);
 
             var tileType = tile.TileType;
 
-            if (!_tray.TryInsert(tileType, out _))
+            if (!_tray.TryInsert(tileType, out var slotIndex))
             {
-                // Guard only — with the level generator's capacity invariant this should
-                // never happen, but a full tray with no match is a loss, not a crash.
                 EndGame(won: false);
                 return;
             }
@@ -159,14 +232,29 @@ namespace Presentation
                 _tray.RemoveSlots(matchResult.SlotIndices);
             }
 
-            _boardController.Refresh();
-            _trayController.Refresh(completedMatch);
+            var slotWorldPos = _trayController.GetSlotWorldPosition(slotIndex);
+            var slotScale = _trayController.GetSlotIconWorldScale(slotIndex);
 
-            ResolveTurnOutcome();
+            _pendingFlies++;
+            _boardController.FlyTileToSlot(tileId, slotWorldPos, slotScale, () =>
+            {
+                _trayController.ShowSlotIcon(slotIndex, tileType);
+                _trayController.Refresh(completedMatch);
+                _boardController.Refresh();
+                _pendingFlies--;
+                ResolveTurnOutcome();
+            });
         }
 
         private void ResolveTurnOutcome()
         {
+            if (_isGameOver) return;
+            // Stay in Animating until every queued fly has landed — otherwise
+            // an earlier fly's landing would flip state to Ready while later
+            // flies are still in the air, letting a stray Undo/Shuffle fire
+            // mid-air.
+            if (_pendingFlies > 0) return;
+
             if (_board.IsCleared && _tray.IsEmpty)
             {
                 EndGame(won: true);
@@ -179,7 +267,10 @@ namespace Presentation
                 return;
             }
 
-            _stateMachine.TrySetState(BoardState.Ready);
+            if (_stateMachine.Current == BoardState.Animating)
+            {
+                _stateMachine.TrySetState(BoardState.Ready);
+            }
         }
 
         private void EndGame(bool won)
@@ -208,18 +299,12 @@ namespace Presentation
 
         public void Pause()
         {
-            if (_stateMachine.TrySetState(BoardState.Paused))
-            {
-                Time.timeScale = 0;
-            }
+            if (_stateMachine.TrySetState(BoardState.Paused)) Time.timeScale = 0;
         }
 
         public void Resume()
         {
-            if (_stateMachine.TrySetState(BoardState.Ready))
-            {
-                Time.timeScale = 1;
-            }
+            if (_stateMachine.TrySetState(BoardState.Ready)) Time.timeScale = 1;
         }
 
         public void Restart()
@@ -245,20 +330,9 @@ namespace Presentation
         // Power-ups
         // ------------------------------------------------------------------
 
-        /// <summary>
-        /// Rebuilds the board and tray from scratch from the original level layout and
-        /// replays every move up to (but not including) the last one. Domain has no
-        /// reversible "un-select" operation (TrySelectTile's cascade is one-way by
-        /// design — see DECISIONS.md), so rather than add one, undo is implemented at
-        /// this layer as deterministic replay: BoardGenerator.CreateBoard on the same
-        /// LevelModel always assigns the same TileIds in the same order, so historical
-        /// TileIds remain valid references into the freshly rebuilt board.
-        /// </summary>
         public void Undo()
         {
-            if (_isGameOver || _stateMachine.Current != BoardState.Ready || _moveHistory.Count == 0)
-                return;
-
+            if (_isGameOver || _stateMachine.Current != BoardState.Ready || _moveHistory.Count == 0) return;
             _moveHistory.RemoveAt(_moveHistory.Count - 1);
             RebuildFromHistory();
         }
@@ -273,58 +347,37 @@ namespace Presentation
 
             foreach (var tileId in replay)
             {
-                if (!_board.TryGetTile(tileId, out var tile) || !tile.IsSelectable)
-                {
-                    continue; // Shouldn't happen for a valid history, but never corrupt state over it.
-                }
-
+                if (!_board.TryGetTile(tileId, out var tile) || !tile.IsSelectable) continue;
                 var type = tile.TileType;
-                if (!_tray.TryInsert(type, out _))
-                {
-                    continue;
-                }
-
+                if (!_tray.TryInsert(type, out _)) continue;
                 _board.TrySelectTile(tile);
                 _moveHistory.Add(tileId);
-
                 if (_matchSystem.TryEvaluate(_tray, type, out var matchResult))
                 {
                     _tray.RemoveSlots(matchResult.SlotIndices);
                 }
             }
 
-            var flyTarget = _trayRoot.anchoredPosition - _boardRoot.anchoredPosition;
-            _boardController.Initialize(_board, _fruitSprites, flyTarget, OnTileSelected);
+            _boardController.Initialize(_board, _tileTheme.BaseTileSprite, _fruitSprites, OnTileSelected);
             _trayController.Initialize(_tray, _tileTheme, _fruitSprites);
 
             _isGameOver = false;
             _stateMachine.TrySetState(BoardState.Ready);
         }
 
-        /// <summary>
-        /// Reshuffles which type each still-on-board tile shows, keeping positions,
-        /// layers and per-type counts identical — only the type-to-position mapping
-        /// changes. TileModel.TileType has no setter (immutable by design), so this
-        /// rebuilds a fresh BoardModel from a synthetic layout of the remaining tiles
-        /// rather than mutating existing tiles in place.
-        /// </summary>
         public void Shuffle()
         {
-            if (_isGameOver || _stateMachine.Current != BoardState.Ready)
-                return;
+            if (_isGameOver || _stateMachine.Current != BoardState.Ready) return;
 
             var remainingCoords = new List<BoardCoordinate>();
             var remainingTypes = new List<TileTypeId>();
             foreach (var tile in _board.AllTiles)
             {
-                if (tile.State == TileState.Removed)
-                    continue;
+                if (tile.State == TileState.Removed) continue;
                 remainingCoords.Add(tile.Coordinate);
                 remainingTypes.Add(tile.TileType);
             }
-
-            if (remainingCoords.Count == 0)
-                return;
+            if (remainingCoords.Count == 0) return;
 
             var random = new System.Random();
             for (var i = remainingTypes.Count - 1; i > 0; i--)
@@ -341,21 +394,13 @@ namespace Presentation
 
             var shuffledLevel = new LevelModel(_level.LevelId, spawns, _level.TraySize, _level.MatchCount, _level.ThemeId, _level.Rules);
             _board = BoardGenerator.CreateBoard(shuffledLevel);
-
-            // Shuffling changes tile identity (fresh TileIds), so past history no longer
-            // maps onto valid tiles — clear it rather than leave Undo pointing at nothing.
             _moveHistory.Clear();
-
-            var flyTarget = _trayRoot.anchoredPosition - _boardRoot.anchoredPosition;
-            _boardController.Initialize(_board, _fruitSprites, flyTarget, OnTileSelected);
+            _boardController.Initialize(_board, _tileTheme.BaseTileSprite, _fruitSprites, OnTileSelected);
         }
 
-        /// <summary>Highlights a currently-selectable tile — purely visual, no state change.</summary>
         public void Hint()
         {
-            if (_isGameOver || _stateMachine.Current != BoardState.Ready)
-                return;
-
+            if (_isGameOver || _stateMachine.Current != BoardState.Ready) return;
             foreach (var tile in _board.SelectableTiles)
             {
                 _boardController.PulseTile(tile.Id);
@@ -364,32 +409,30 @@ namespace Presentation
         }
 
         /// <summary>
-        /// Removes one selectable tile directly from the board without routing it
-        /// through the tray — helps clear the board but doesn't progress toward
-        /// completing a tray match. A blunt, always-available "unstick" tool.
+        /// Removes one selectable tile. Flies it upward off-screen so the removal
+        /// still reads as a physical action.
         /// </summary>
         public void Hammer()
         {
-            if (_isGameOver || _stateMachine.Current != BoardState.Ready)
-                return;
+            if (_isGameOver || _stateMachine.Current != BoardState.Ready) return;
 
             TileModel target = null;
-            foreach (var tile in _board.SelectableTiles)
-            {
-                target = tile;
-                break;
-            }
+            foreach (var tile in _board.SelectableTiles) { target = tile; break; }
+            if (target == null) return;
 
-            if (target == null)
-                return;
-
-            if (!_stateMachine.TrySetState(BoardState.Animating))
-                return;
+            if (_stateMachine.Current == BoardState.Ready) _stateMachine.TrySetState(BoardState.Animating);
 
             _board.TrySelectTile(target);
-            _boardController.Refresh();
 
-            ResolveTurnOutcome();
+            var origin = _boardController.GetTileWorldPosition(target.Id);
+            var offscreen = new Vector3(origin.x, _cameraOrthoSize + 3f, origin.z);
+            _pendingFlies++;
+            _boardController.FlyTileToSlot(target.Id, offscreen, Vector3.one * 0.3f, () =>
+            {
+                _boardController.Refresh();
+                _pendingFlies--;
+                ResolveTurnOutcome();
+            });
         }
     }
 }

@@ -2,6 +2,61 @@
 
 All notable changes to the project, dated, most recent first.
 
+## 2026-08-04 — Sprite-based tiles & tray, real fly-to-slot landing
+
+**Changed**
+- **TileView** rewritten as a world-space SpriteRenderer prefab (two `SpriteRenderer` children — Base + Fruit — plus a `BoxCollider2D` for `OnMouseDown` input). Draw order is driven by explicit `sortingOrder` per board layer (`layer × 10 + subOrder`), not by sibling index or transform.z — the sorting bugs from the uGUI implementation are gone by construction because a layer-2 tile's band strictly exceeds a layer-0 tile's band regardless of instantiation order.
+- **BoardController** rewritten around plain `Transform`s in world space. Positions use `(X + layer × 0.5) × spacing` (same visual nesting math as before, no legacy xCorrection). Auto-spawns a shared `FlyLayer` transform where in-flight tiles are reparented at sortingOrder 1500 so they always draw above every board layer and the tray bar.
+- **TrayController** rewritten as world-space sprites. Slot bg / icon sortingOrder pinned to 501 / 502; tray bar to 500. Removed the tray's own "insert pop" — insertions now come in via `ShowSlotIcon(slotIndex, type)`, called by GameFlowController the frame the flying tile lands.
+- **GameFlowController** tap flow rewritten so the visible response (slot-icon reveal, match pop, board refresh, next-turn unlock) is deferred until the flying tile physically arrives at the tray. Model mutations still happen up-front so state is consistent, but the tile no longer "appears in the tray out of nowhere" — it lands there. `_boardRoot` / `_trayRoot` field types changed from `RectTransform` to `Transform`; adds a camera reference and portrait ortho settings baked in.
+- **Hammer** power-up now flies its tile off the top of the play area instead of vanishing on the spot.
+
+**Added**
+- `Editor/TilePrefabBuilder` — `Tools ▸ Rebuild Tile Prefab` (also runs automatically at the start of `Tools ▸ Build Game Scenes`). Generates `Assets/Resources/Prefabs/TileView.prefab` with the right SpriteRenderer children and `TileView` serialized-field wiring, so pulling this refactor doesn't leave a stale UI-based prefab on disk.
+
+**Notes**
+- HUD stays uGUI on a Screen-Space Overlay Canvas — buttons, popups, splash all unchanged.
+- Sorting scheme: board layers 0-10 (0-100), tray bar 500, slot bg 501, slot icon 502, flying tile 1500, HUD Canvas Overlay (always on top).
+
+## 2026-08-04 — SO-only levels, dynamic Level Select, complete-grid enforcement
+
+**Added**
+- `LevelSystem.Generation.PyramidSizeSolver` — finds a nearby pyramid whose total tile count is divisible by MatchCount. Prefers to grow (25→27) rather than shrink, per the user rule.
+- `LevelDefinitionBuilder.SolveCompleteGridLayers` + `TotalTiles` — public helpers so the SO custom inspector previews the exact geometry the runtime will produce, and the "Auto-fix authored layers" button can bake it back into the asset.
+- SO inspector: **Auto-fix authored layers** button next to Reset. Preview footer now shows "Effective: base W×H · N layers · T tiles (÷match = G groups)".
+
+**Changed**
+- `LevelDefinitionBuilder` no longer trims tail cells (which produced a visible notch). It now enforces complete rectangles by dropping the topmost layer(s) until the total divides, and only shrinks the top-remaining layer as a last resort.
+- `BatchLevelGenerator.Configure` runs `PyramidSizeSolver` on the computed dimensions before writing the SO — every generated level starts already divisible, so the builder's auto-adjust is a no-op at runtime.
+- `Presentation.GameFlowController.InitializeGame`: removed the `LevelGenerator` procedural fallback. If `Resources/Levels/LevelCollection.asset` is missing, logs a hard error pointing to the Master Level Designer instead of silently generating a level. Everything is configured in the Inspector now.
+- `Presentation.UI.LevelSelectUI`: level button count is now `LevelCollectionSO.Count`, not the hardcoded 50. Scroll content height resizes to match. Empty collection produces one warning + zero buttons rather than 50 buttons pointing at nothing.
+
+## 2026-08-04 — Master Level Designer + batch generator
+
+**Added**
+- `LevelSystem.Generation.BatchLevelGenerator` + `DifficultyCurve` — pure C# routine that fills a `LevelDefinitionSO` from a start/end curve at a given level index. Every difficulty axis (match count, base size, layer count, tray size, tile faces) has a start value, end value, and shared curve shape (Linear / EaseIn / EaseOut / EaseInOut). Cap-aware: layer count is clamped so a pyramid never runs out of room and produces a degenerate 0×0 top.
+- Rewrote `LevelSystem.EditorTools.LevelDesignerWindow` as a tabbed **Master Level Designer** (Overview / Batch Generator / Levels / Presets). Batch Generator is the primary flow — slider for level count (default 50, matching Level Select's `MaxLevels`), start/end fields per axis, live preview snapshots (start / mid / end), and one-click generation that writes every `Level_NNN.asset` under `Assets/Resources/Levels/` and appends them to the collection. Overview tab has an inline how-to and status card; Presets tab lists every `LevelPresetSO` in the project with one-click "Apply to selected".
+- Levels tab gained `Duplicate` and asks before deleting the underlying asset on `Remove`.
+
+**Changed**
+- `LEVEL_SYSTEM.md` rewritten around the Master Designer's tabs; setup guide is now a 60-second walkthrough that ends with a full 50-level ramp.
+
+## 2026-08-04 — SO-driven Level System + editor tooling
+
+**Added**
+- `LevelSystem/Data/` ScriptableObjects for designer-authored levels: `LayerDefinition` (struct), `LevelDefinitionSO` (per-level rules + layer list), `LevelPresetSO` (reusable shape presets — PyramidShrink, TowerFlat, DoublePyramid, Custom), `LevelCollectionSO` (ordered level list loaded at boot).
+- `LevelSystem/Generation/LevelDefinitionBuilder` — converts a `LevelDefinitionSO` into `Domain.Levels.LevelModel`. Fills each layer as a complete `w × h` grid, auto-centers upper layers over the layer below (clamps oversize layers rather than crashing), keeps every tile type's count a multiple of `MatchCount`, deterministic shuffle from `Seed`.
+- `LevelSystem/Editor/LevelDesignerWindow` (`Tools ▸ Level Designer`) — pick/create a `LevelCollectionSO`, add/remove/reorder levels, apply presets, live pyramid preview per level.
+- `LevelSystem/Editor/LevelDefinitionSOEditor` + `LevelPreviewDrawer` — custom inspector with "Apply Preset → Layers", "Reset to Classic 5-4-3", inline pyramid preview drawn from the actual builder output, and a validation panel warning about undersized upper layers or non-divisible tile counts.
+- `Docs/LEVEL_SYSTEM.md` — full guide (model, types, runtime hookup, editor tool, setup from a fresh checkout).
+
+**Changed**
+- `Presentation.GameFlowController.InitializeGame` now prefers `Resources/Levels/LevelCollection.asset` if present, falling back to the procedural `LevelGenerator` otherwise — so a fresh checkout still boots into a playable level, and shipping just means dropping in an authored collection.
+- `ROADMAP.md` / `SYSTEMS.md` updated with the new level-system entries.
+
+**Notes**
+- Pyramid stacking (only-topmost-tile-playable; removing a top tile exposes the four beneath) is handled by the existing `Domain.Board.StackingResolver.ResolvePyramidStacking`; the new system just supplies its input in a designer-friendly form.
+
 ## 2026-08-03 — Presentation polish pass: audio, haptics, UI sizing, board/tray bug fixes
 
 **Added**

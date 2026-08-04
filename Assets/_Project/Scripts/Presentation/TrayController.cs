@@ -1,185 +1,226 @@
+using System;
 using System.Collections.Generic;
 using Core.Services;
 using Domain.Board;
 using Domain.Matching;
 using Domain.Tray;
 using PrimeTween;
-using Presentation.UI;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Presentation
 {
     /// <summary>
-    /// Manages the visual representation of the tray. Must be attached to a
-    /// RectTransform under a Canvas. Builds its own slot visuals procedurally against a
-    /// themed tray-bar background — each slot shows the base tile socket plus the
-    /// fruit icon currently occupying it (mirrors TileView's base+fruit layering).
+    /// World-space sprite tray. Each slot is a child transform with a background
+    /// and an icon <see cref="SpriteRenderer"/>. Draw order is fixed by
+    /// per-role sortingOrder — tray bar 500, slot bg 501, slot icon 502 — so
+    /// nothing on the tray ever fights a board tile for visibility.
+    /// The tray no longer handles the insert-pop animation itself: that's the
+    /// job of the flying tile from the board (see BoardController.FlyTileToSlot).
+    /// GameFlowController calls <see cref="ShowSlotIcon"/> the frame the flying
+    /// tile lands, and the transition reads as the tile becoming the slot icon.
     /// </summary>
-    [RequireComponent(typeof(RectTransform))]
     public sealed class TrayController : MonoBehaviour
     {
-        /// <summary>
-        /// Ideal (unscaled) slot size/spacing, used as-is for typical tray capacities
-        /// (6-9 slots). Capacity can go up to 12, though, and 12 slots at full ideal
-        /// spacing would overflow a 1080-wide portrait canvas — see ComputeSlotMetrics,
-        /// which scales both down together only when the ideal width wouldn't fit, so a
-        /// small everyday tray reads as big as it can while a maxed-out one still fits.
-        /// </summary>
-        [SerializeField] private float _slotSize = 130f;
-        [SerializeField] private float _slotSpacing = 140f;
-        [SerializeField] private float _maxTrayWidth = 980f;
+        [Header("Layout (world units)")]
+        [SerializeField] private float _slotSize = 1f;
+        [SerializeField] private float _slotSpacing = 1.08f;
+        [Tooltip("Widest tray width in world units. High-capacity trays scale down uniformly to stay inside this budget.")]
+        [SerializeField] private float _maxTrayWidth = 8.5f;
+        [SerializeField] private float _iconYOffset = 0.05f;
 
-        /// <summary>Icon is nudged up from the slot's visual center so it doesn't sit flush on the socket's bottom edge — scales with the effective slot size.</summary>
-        [SerializeField] private float _iconYOffset = 10f;
+        /// <summary>
+        /// Uniform scale applied to the icon transform — deliberately matches the
+        /// tile prefab's Fruit child scale (see <c>TilePrefabBuilder</c>) so a
+        /// fruit shows at the exact same visual size on the tile and in the tray.
+        /// Previously the icon was force-scaled to fill the whole slot (0.65× or
+        /// 1×), which made the tray fruit look ~3× bigger than on the board.
+        /// </summary>
+        [SerializeField] private float _iconScale = 0.3f;
+
+        [Header("Theme")]
+        [SerializeField] private TileThemeSO _theme;
+
+        // Tray sits above every board tile (board bands top out at layer × 100 +
+        // grid sub-order — <1000 for any realistic pyramid).
+        private const int TrayBarSortingOrder = 2000;
+        private const int SlotBgSortingOrder = 2001;
+        private const int SlotIconSortingOrder = 2002;
 
         private float _effectiveSlotSize;
         private float _effectiveSlotSpacing;
-        private float _effectiveIconYOffset;
 
         private TrayModel _trayModel;
         private IReadOnlyList<Sprite> _fruitSpritesByType;
-        private TileThemeSO _theme;
-        private readonly List<Image> _slotBackgrounds = new();
-        private readonly List<Image> _slotIcons = new();
+        private readonly List<Transform> _slotRoots = new();
+        private readonly List<SpriteRenderer> _slotBackgrounds = new();
+        private readonly List<SpriteRenderer> _slotIcons = new();
+        private readonly List<Vector3> _slotIconRestScales = new();
         private readonly List<TileTypeId?> _lastKnownSlots = new();
-        private Sequence[] _popSequences = System.Array.Empty<Sequence>();
+        private Sequence[] _popSequences = Array.Empty<Sequence>();
+        private Transform _trayBar;
+
+        public int Capacity => _trayModel != null ? _trayModel.Capacity : 0;
 
         public void Initialize(TrayModel trayModel, TileThemeSO theme, IReadOnlyList<Sprite> fruitSpritesByType)
         {
             _trayModel = trayModel;
-            _theme = theme;
+            if (theme != null) _theme = theme;
             _fruitSpritesByType = fruitSpritesByType;
             CreateSlots();
             SnapToCurrentState();
         }
 
+        public Vector3 GetSlotWorldPosition(int slotIndex)
+        {
+            if (slotIndex < 0 || slotIndex >= _slotRoots.Count) return transform.position;
+            return _slotRoots[slotIndex].position + new Vector3(0f, _iconYOffset, 0f);
+        }
+
+        public Vector3 GetSlotIconWorldScale(int slotIndex)
+        {
+            if (slotIndex < 0 || slotIndex >= _slotIcons.Count) return Vector3.one;
+            return _slotIcons[slotIndex].transform.lossyScale;
+        }
+
         /// <summary>
-        /// Slots (count varies 6-12 per level) are always dynamic — there's no static
-        /// "correct" count to hand-author. The TrayBar background, however, is left
-        /// alone if a scene-authored one already exists (named "TrayBar", built once by
-        /// Tools > Build Game Scenes and editable in the Inspector) so re-Initializing
-        /// (Shuffle/Undo) doesn't destroy and rebuild it every time; only falls back to
-        /// building one procedurally if it's missing.
+        /// Called by GameFlowController the frame a flying tile lands. Snaps the
+        /// slot's icon to the right sprite + enabled, plays a small OutBack pulse
+        /// so the moment is felt, and records the occupant.
         /// </summary>
+        public void ShowSlotIcon(int slotIndex, TileTypeId type)
+        {
+            if (slotIndex < 0 || slotIndex >= _slotIcons.Count) return;
+            var icon = _slotIcons[slotIndex];
+            StopStalePop(slotIndex, icon);
+
+            icon.sprite = _fruitSpritesByType[type.Value % _fruitSpritesByType.Count];
+            icon.enabled = true;
+            var rest = _slotIconRestScales[slotIndex];
+            icon.transform.localScale = rest * 1.15f;
+            Tween.Scale(icon.transform, rest, 0.18f, Ease.OutBack);
+
+            _lastKnownSlots[slotIndex] = type;
+        }
+
         private void CreateSlots()
         {
-            // PrimeTween disallows stopping one of a Sequence's nested tweens directly
-            // (see TileView.CancelAllAnimations) — the per-slot pop Sequence must be
-            // stopped as a Sequence before the plain Tween.StopAll sweep below, or an
-            // interrupted pop (e.g. a Shuffle/Undo rebuild mid-animation) logs a
-            // PrimeTween "OnComplete callback ignored" error.
-            foreach (var sequence in _popSequences)
+            foreach (var s in _popSequences)
             {
-                if (sequence.isAlive)
-                {
-                    sequence.Stop();
-                }
+                if (s.isAlive) s.Stop();
             }
 
             var existingBar = transform.Find("TrayBar");
-
-            foreach (Transform child in transform)
+            for (var i = transform.childCount - 1; i >= 0; i--)
             {
-                if (child == existingBar)
-                {
-                    continue;
-                }
-
-                // Stop any in-flight tween on this subtree before destroying it —
-                // otherwise an interrupted tween (e.g. a slot icon's pop-in animation cut
-                // short by a Shuffle/Undo rebuild) logs a PrimeTween "OnComplete callback
-                // ignored" error when its target disappears out from under it. The
-                // animated object is the nested Icon child, not the slot itself, so this
-                // has to walk the whole subtree, not just the top-level child.
+                var child = transform.GetChild(i);
+                if (child == existingBar) continue;
                 foreach (var descendant in child.GetComponentsInChildren<Transform>(true))
                 {
-                    PrimeTween.Tween.StopAll(descendant);
+                    Tween.StopAll(descendant);
                 }
                 Destroy(child.gameObject);
             }
+            _slotRoots.Clear();
             _slotBackgrounds.Clear();
             _slotIcons.Clear();
+            _slotIconRestScales.Clear();
             _lastKnownSlots.Clear();
             _popSequences = new Sequence[_trayModel.Capacity];
 
             ComputeSlotMetrics();
-
             var totalWidth = (_trayModel.Capacity - 1) * _effectiveSlotSpacing;
             var barWidth = totalWidth + _effectiveSlotSpacing * 1.4f;
 
-            if (existingBar != null)
-            {
-                var existingBarRect = (RectTransform)existingBar;
-                existingBarRect.sizeDelta = new Vector2(barWidth, _effectiveSlotSize * 1.3f);
-                existingBarRect.SetAsFirstSibling();
-            }
-            else if (_theme.TrayBarSprite != null)
-            {
-                var barGO = new GameObject("TrayBar", typeof(RectTransform));
-                barGO.transform.SetParent(transform, false);
-                var barRect = barGO.GetComponent<RectTransform>();
-                barRect.anchorMin = new Vector2(0.5f, 0.5f);
-                barRect.anchorMax = new Vector2(0.5f, 0.5f);
-                barRect.pivot = new Vector2(0.5f, 0.5f);
-                barRect.sizeDelta = new Vector2(barWidth, _effectiveSlotSize * 1.3f);
-                var barImage = barGO.AddComponent<Image>();
-                barImage.sprite = _theme.TrayBarSprite;
-                barImage.type = Image.Type.Sliced;
-                barGO.transform.SetAsFirstSibling();
-            }
+            EnsureTrayBar(existingBar, barWidth);
 
             var startX = -totalWidth / 2f;
-
             for (var i = 0; i < _trayModel.Capacity; i++)
             {
-                var slotGO = new GameObject($"Slot_{i}", typeof(RectTransform));
+                var slotGO = new GameObject($"Slot_{i}");
                 slotGO.transform.SetParent(transform, false);
+                slotGO.transform.localPosition = new Vector3(startX + i * _effectiveSlotSpacing, 0f, 0f);
+                slotGO.transform.localScale = Vector3.one;
 
-                var rectTransform = slotGO.GetComponent<RectTransform>();
-                rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-                rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                rectTransform.pivot = new Vector2(0.5f, 0.5f);
-                rectTransform.sizeDelta = new Vector2(_effectiveSlotSize, _effectiveSlotSize);
-                rectTransform.anchoredPosition = new Vector2(startX + i * _effectiveSlotSpacing, 0f);
+                var bgGO = new GameObject("Bg");
+                bgGO.transform.SetParent(slotGO.transform, false);
+                var bg = bgGO.AddComponent<SpriteRenderer>();
+                bg.sprite = _theme != null ? _theme.BaseTileSprite : null;
+                bg.color = new Color(1f, 1f, 1f, 0.55f);
+                bg.sortingOrder = SlotBgSortingOrder;
+                ScaleRendererToSize(bg, _effectiveSlotSize);
 
-                var bgImage = slotGO.AddComponent<Image>();
-                bgImage.sprite = _theme.BaseTileSprite;
-                bgImage.preserveAspect = true;
-                bgImage.color = new Color(1f, 1f, 1f, 0.5f);
-
-                var iconGO = new GameObject("Icon", typeof(RectTransform));
+                var iconGO = new GameObject("Icon");
                 iconGO.transform.SetParent(slotGO.transform, false);
-                var iconRect = iconGO.GetComponent<RectTransform>();
-                iconRect.anchorMin = new Vector2(0.5f, 0.5f);
-                iconRect.anchorMax = new Vector2(0.5f, 0.5f);
-                iconRect.pivot = new Vector2(0.5f, 0.5f);
-                iconRect.sizeDelta = new Vector2(_effectiveSlotSize * 0.65f, _effectiveSlotSize * 0.65f);
-                iconRect.anchoredPosition = new Vector2(0f, _effectiveIconYOffset);
-                var iconImage = iconGO.AddComponent<Image>();
-                iconImage.preserveAspect = true;
-                iconImage.enabled = false;
+                iconGO.transform.localPosition = new Vector3(0f, _iconYOffset, 0f);
+                // Match the tile prefab's Fruit-child scale exactly so a fruit
+                // sprite is the same visual size on the tile and in the tray.
+                // No per-sprite bounds normalization — that would inflate a small
+                // sprite to fill the slot regardless of its real dimensions.
+                iconGO.transform.localScale = Vector3.one * _iconScale;
+                var icon = iconGO.AddComponent<SpriteRenderer>();
+                icon.sortingOrder = SlotIconSortingOrder;
+                icon.enabled = false;
 
-                _slotBackgrounds.Add(bgImage);
-                _slotIcons.Add(iconImage);
+                _slotRoots.Add(slotGO.transform);
+                _slotBackgrounds.Add(bg);
+                _slotIcons.Add(icon);
+                _slotIconRestScales.Add(icon.transform.localScale);
                 _lastKnownSlots.Add(null);
             }
         }
 
-        /// <summary>
-        /// Scales slot size/spacing/icon-offset down together, uniformly, only when the
-        /// ideal (unscaled) width for this level's tray capacity would exceed
-        /// _maxTrayWidth — everyday capacities (6-9) get the full-size tray, only a
-        /// maxed-out 12-slot tray gets shrunk to still fit a 1080-wide portrait canvas.
-        /// </summary>
+        private void EnsureTrayBar(Transform existing, float barWidth)
+        {
+            if (existing != null)
+            {
+                var sr = existing.GetComponent<SpriteRenderer>();
+                if (sr != null)
+                {
+                    sr.drawMode = SpriteDrawMode.Sliced;
+                    sr.size = new Vector2(barWidth, _effectiveSlotSize * 1.3f);
+                    sr.sortingOrder = TrayBarSortingOrder;
+                }
+                _trayBar = existing;
+                return;
+            }
+
+            if (_theme == null || _theme.TrayBarSprite == null) return;
+
+            var go = new GameObject("TrayBar");
+            go.transform.SetParent(transform, false);
+            go.transform.localPosition = Vector3.zero;
+            var renderer = go.AddComponent<SpriteRenderer>();
+            renderer.sprite = _theme.TrayBarSprite;
+            renderer.drawMode = SpriteDrawMode.Sliced;
+            renderer.size = new Vector2(barWidth, _effectiveSlotSize * 1.3f);
+            renderer.sortingOrder = TrayBarSortingOrder;
+            _trayBar = go.transform;
+        }
+
+        private static void ScaleRendererToSize(SpriteRenderer renderer, float worldSize)
+        {
+            if (renderer.sprite == null)
+            {
+                renderer.transform.localScale = new Vector3(worldSize, worldSize, 1f);
+                return;
+            }
+            var bounds = renderer.sprite.bounds.size;
+            var maxDim = Mathf.Max(bounds.x, bounds.y);
+            if (maxDim <= 0.0001f)
+            {
+                renderer.transform.localScale = new Vector3(worldSize, worldSize, 1f);
+                return;
+            }
+            var scale = worldSize / maxDim;
+            renderer.transform.localScale = new Vector3(scale, scale, 1f);
+        }
+
         private void ComputeSlotMetrics()
         {
             var idealWidth = (_trayModel.Capacity - 1) * _slotSpacing + _slotSize;
             var scale = idealWidth > _maxTrayWidth ? _maxTrayWidth / idealWidth : 1f;
-
             _effectiveSlotSize = _slotSize * scale;
             _effectiveSlotSpacing = _slotSpacing * scale;
-            _effectiveIconYOffset = _iconYOffset * scale;
         }
 
         private void SnapToCurrentState()
@@ -202,147 +243,93 @@ namespace Presentation
         }
 
         /// <summary>
-        /// Diffs against the last known slot contents so newly-filled slots pop in and
-        /// newly-cleared (matched) slots pop out, instead of just snapping visibility.
-        /// <paramref name="completedMatch"/>, when present, marks exactly which slots
-        /// just finished a run — including the slot that completed it this turn, whose
-        /// insert and removal both happen (in TrayModel) before this Refresh call ever
-        /// sees it, so a plain previous/current diff would never render it at all. Those
-        /// slots get queued into a short staggered pop instead of vanishing instantly,
-        /// so a multi-tile match reads as a quick beat rather than one flicker.
+        /// Pops matched slots. Only matched slots pop — a slot going empty
+        /// without a match will never happen in this game, so the old
+        /// "content-null but previous had a value → pop" diff was double-
+        /// popping intermediate tiles when a later tile completed the match.
+        /// Inserts are handled up-front by <see cref="ShowSlotIcon"/>.
         /// </summary>
         public void Refresh(MatchResult? completedMatch = null)
         {
-            HashSet<int> matchedSlots = null;
-            if (completedMatch.HasValue)
+            if (!completedMatch.HasValue) return;
+
+            var matched = completedMatch.Value.SlotIndices;
+            var poppingIndices = new List<int>(matched.Count);
+            var matchType = completedMatch.Value.TileType;
+
+            for (var k = 0; k < matched.Count; k++)
             {
-                matchedSlots = new HashSet<int>(completedMatch.Value.SlotIndices);
+                var i = matched[k];
+                if (i < 0 || i >= _slotIcons.Count) continue;
+
+                var icon = _slotIcons[i];
+                StopStalePop(i, icon);
+
+                // A matched slot the player never saw filled (rare — the flying
+                // tile hasn't landed there yet) still needs an icon to pop.
+                if (!icon.enabled)
+                {
+                    icon.sprite = _fruitSpritesByType[matchType.Value % _fruitSpritesByType.Count];
+                    icon.enabled = true;
+                    icon.transform.localScale = _slotIconRestScales[i];
+                }
+
+                poppingIndices.Add(i);
+                _lastKnownSlots[i] = null;
             }
 
-            var poppingIndices = new List<int>();
-
+            // Repair the type-change edge case (rare — can happen if RemoveSlots
+            // compaction moved a different type into an already-known slot).
             for (var i = 0; i < _trayModel.Capacity; i++)
             {
                 var slotContent = _trayModel.Slots[i];
                 var previous = _lastKnownSlots[i];
-                var icon = _slotIcons[i];
-
-                if (matchedSlots != null && matchedSlots.Contains(i))
+                if (slotContent.HasValue && previous.HasValue && slotContent.Value.Value != previous.Value.Value)
                 {
-                    // This index is starting a brand new pop — if it's still mid-way
-                    // through an earlier one (a fast follow-up match can complete again
-                    // at the same compacted index before the previous pop finished
-                    // animating), stop that one first so its later steps can't run
-                    // against this new occupant.
-                    StopStalePop(i, icon);
-
-                    if (!icon.enabled)
-                    {
-                        icon.sprite = _fruitSpritesByType[completedMatch.Value.TileType.Value % _fruitSpritesByType.Count];
-                        icon.enabled = true;
-                        icon.transform.localScale = Vector3.one;
-                    }
-                    poppingIndices.Add(i);
-                    _lastKnownSlots[i] = null;
-                    continue;
+                    _slotIcons[i].sprite = _fruitSpritesByType[slotContent.Value.Value % _fruitSpritesByType.Count];
+                    _lastKnownSlots[i] = slotContent;
                 }
-
-                if (slotContent.HasValue && !previous.HasValue)
-                {
-                    // Same reasoning as above: this index is about to show a freshly
-                    // inserted tile, so any leftover pop animation on it must be
-                    // stopped first, or its delayed "shrink to 0" would fire after this
-                    // insert's "grow to 1" and silently hide the new tile.
-                    StopStalePop(i, icon);
-
-                    icon.sprite = _fruitSpritesByType[slotContent.Value.Value % _fruitSpritesByType.Count];
-                    icon.enabled = true;
-                    icon.transform.localScale = Vector3.zero;
-                    Tween.Scale(icon.transform, 1f, 0.25f, Ease.OutBack);
-                }
-                else if (!slotContent.HasValue && previous.HasValue)
-                {
-                    poppingIndices.Add(i);
-                }
-                else if (slotContent.HasValue && previous.HasValue && slotContent.Value.Value != previous.Value.Value)
-                {
-                    // Defensive: shouldn't happen given compaction semantics, but keep visuals correct if it ever does.
-                    icon.sprite = _fruitSpritesByType[slotContent.Value.Value % _fruitSpritesByType.Count];
-                }
-
-                _lastKnownSlots[i] = slotContent;
             }
 
-            if (poppingIndices.Count > 0)
-            {
-                PlayMatchPopSequence(poppingIndices);
-            }
+            if (poppingIndices.Count > 0) PlayMatchPopSequence(poppingIndices);
         }
 
-        /// <summary>
-        /// Stops and resets a slot's in-flight pop sequence, if any — only called at the
-        /// point an index is about to be reused for a new pop or a new insert. Calling
-        /// this unconditionally for every index on every Refresh (an earlier version of
-        /// this code did) forcibly cut off OTHER slots' still-legitimately-running pop
-        /// animations the moment any unrelated click happened — Stop() doesn't invoke
-        /// OnComplete, so those interrupted tiles never got their icon.enabled = false,
-        /// leaving already-matched tiles stuck visible indefinitely.
-        /// </summary>
-        private void StopStalePop(int index, Image icon)
+        private void StopStalePop(int index, SpriteRenderer icon)
         {
-            if (!_popSequences[index].isAlive)
-            {
-                return;
-            }
-
-            _popSequences[index].Stop();
-            icon.transform.localScale = Vector3.one;
+            if (_popSequences[index].isAlive) _popSequences[index].Stop();
+            // Also kill the ShowSlotIcon land-pulse tween if it's still running —
+            // otherwise a rapid land-then-pop on the same slot leaves two tweens
+            // fighting for the icon's scale (that's what caused the flicker).
+            Tween.StopAll(icon.transform);
+            icon.transform.localScale = _slotIconRestScales[index];
         }
 
         private const float PopStagger = 0.05f;
         private const float PopPunchDuration = 0.09f;
         private const float PopShrinkDuration = 0.16f;
-
-        /// <summary>
-        /// Semitone-ish step applied per pop within one match, so a multi-tile match
-        /// plays as a short ascending run (like a xylophone glissando) instead of the
-        /// same recording firing back to back — a rising cascade reads as "building
-        /// toward a payoff," matching the match-3 genre's usual combo escalation.
-        /// Capped further down so a big 5-tile match doesn't end up chipmunk-pitched.
-        /// </summary>
         private const float PopPitchStep = 0.06f;
         private const float PopPitchMax = 1.35f;
 
-        /// <summary>
-        /// Each slot in <paramref name="indices"/> punches up then shrinks away,
-        /// staggered by a short fixed delay per slot so a multi-tile match reads as a
-        /// quick beat ("...and, and, and!") rather than everything vanishing on the same
-        /// frame the last tile lands — short enough (well under half a second total)
-        /// that it never feels like it's making the player wait.
-        /// </summary>
         private void PlayMatchPopSequence(List<int> indices)
         {
             for (var k = 0; k < indices.Count; k++)
             {
-                // Captured into its own per-iteration local — a `for` loop's own control
-                // variable is shared across all iterations, so a closure referencing `k`
-                // directly would see whatever it ends at (indices.Count) by the time
-                // these delayed callbacks actually fire, not the value from its own turn.
                 var popOrder = k;
                 var index = indices[k];
                 var icon = _slotIcons[index];
-                var iconRect = (RectTransform)icon.transform;
+                var iconTransform = icon.transform;
+                var restScale = _slotIconRestScales[index];
                 var startDelay = k * PopStagger;
 
                 _popSequences[index] = Sequence.Create()
                     .ChainDelay(startDelay)
-                    .Chain(Tween.Scale(iconRect, 1.2f, PopPunchDuration, Ease.OutQuad))
-                    .Chain(Tween.Scale(iconRect, 0f, PopShrinkDuration, Ease.InBack))
+                    .Chain(Tween.Scale(iconTransform, restScale * 1.2f, PopPunchDuration, Ease.OutQuad))
+                    .Chain(Tween.Scale(iconTransform, restScale * 0.001f, PopShrinkDuration, Ease.InBack))
                     .OnComplete(() =>
                     {
                         icon.enabled = false;
-                        iconRect.localScale = Vector3.one;
-                        UIParticleBurst.BurstSparkle(transform, iconRect.position, count: 12, duration: 0.45f, distance: 80f);
+                        iconTransform.localScale = restScale;
+                        WorldParticleBurst.BurstSparkle(iconTransform.position, count: 14, duration: 0.5f, distance: 0.9f);
                         if (GameServices.IsRegistered)
                         {
                             GameServices.Haptics.Play(HapticStrength.Heavy);
